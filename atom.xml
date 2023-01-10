@@ -6,7 +6,7 @@
   <link href="https://blog.romichan.me/atom.xml" rel="self"/>
   
   <link href="https://blog.romichan.me/"/>
-  <updated>2022-10-30T04:06:58.505Z</updated>
+  <updated>2023-01-10T01:15:23.728Z</updated>
   <id>https://blog.romichan.me/</id>
   
   <author>
@@ -17,11 +17,43 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Archlinux + U盘 打造随身系统盘</title>
+    <link href="https://blog.romichan.me/2023/01/09/Archlinux%20+%20U%E7%9B%98%20%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/"/>
+    <id>https://blog.romichan.me/2023/01/09/Archlinux%20+%20U%E7%9B%98%20%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/</id>
+    <published>2023-01-08T16:00:00.000Z</published>
+    <updated>2023-01-10T01:15:23.728Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/Cover.jpg&quot; alt=&quot;封面&quot; title=&quot;Cover&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;最后一次编辑时间：2023-01-10-0-51&quot;&gt;&lt;a href=&quot;#最后一次编辑时间：2023-01-10-0-51&quot; class=&quot;headerlink&quot; title=&quot;最后一次编辑时间：2023-01-10 0:51&quot;&gt;&lt;/a&gt;最后一次编辑时间：2023-01-10 0:51&lt;/h1&gt;&lt;center&gt;
+&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=1393318072&amp;auto=0&amp;height=66&quot;&gt;&lt;/iframe&gt;
+
+
+&lt;p&gt;&lt;em&gt;Music：&lt;a href=&quot;https://music.163.com/#/song?id=1393318072&amp;userid=1369186144&quot;&gt;Fractal&lt;/a&gt; by &lt;a href=&quot;https://music.163.com/#/artist?id=742233&quot;&gt;Tinlicker&lt;/a&gt;&lt;/em&gt;  &lt;/p&gt;
+&lt;/center&gt;   
+
+&lt;blockquote&gt;
+&lt;p&gt;参考文献&lt;br&gt;1.一个完整的Arch Linux 安装流程：&lt;a href=&quot;https://zhuanlan.zhihu.com/p/513859236&quot;&gt;2022.5 archlinux详细安装过程&lt;/a&gt;&lt;br&gt;2.在可移动介质上安装Arch Linux：&lt;a href=&quot;https://wiki.archlinux.org/title/Install_Arch_Linux_on_a_removable_medium&quot;&gt;Install Arch Linux on a removable medium&lt;/a&gt;&lt;br&gt;3.i3wm配置：&lt;a href=&quot;https://blog.csdn.net/r8l8q8/article/details/103889972&quot;&gt;ArchLinux下i3wm简单配置和美化&lt;/a&gt;&lt;br&gt;4.i3wm配置：&lt;a href=&quot;https://segmentfault.com/a/1190000022083424&quot;&gt;一份自用的简单i3wm配置&lt;/a&gt;  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;你的U盘通常要在32G以此来使用较好的图形化功能。&lt;br&gt;本文是一个自用的Arch Linux安装方法，针对的是我自己，如果你看到这个文章了，里头可能有一些东西你是可以用到的。这篇文章旨在帮助不会安装Arch Linux的用户，以及当我自己遗忘某些安装细节时可以回过头来查看。  &lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://blog.romichan.me/categories/Linux/"/>
+    
+    
+    <category term="Archlinux" scheme="https://blog.romichan.me/tags/Archlinux/"/>
+    
+    <category term="Installation" scheme="https://blog.romichan.me/tags/Installation/"/>
+    
+  </entry>
+  
+  <entry>
     <title>利用JACK , 玩转 Reaper For Linux</title>
     <link href="https://blog.romichan.me/2022/10/28/%E5%88%A9%E7%94%A8JACK%20,%20%E7%8E%A9%E8%BD%AC%20Reaper%20For%20Linux/"/>
     <id>https://blog.romichan.me/2022/10/28/%E5%88%A9%E7%94%A8JACK%20,%20%E7%8E%A9%E8%BD%AC%20Reaper%20For%20Linux/</id>
     <published>2022-10-27T16:00:00.000Z</published>
-    <updated>2022-10-30T04:06:58.505Z</updated>
+    <updated>2023-01-09T14:56:03.636Z</updated>
     
     
     <summary type="html">&lt;p&gt;&lt;img src=&quot;/../../../img/JACK-Reaper-For-Linux/Cover.png&quot; alt=&quot;封面&quot; title=&quot;Cover&quot;&gt;&lt;/p&gt;
@@ -49,7 +81,7 @@
     <link href="https://blog.romichan.me/2022/04/27/FL-Studio-Tips-%E5%88%A9%E7%94%A8LFO-LFO-Speed%E5%81%9A%E5%87%BA%E5%8A%A0%E8%8A%B1%E6%95%88%E6%9E%9C/"/>
     <id>https://blog.romichan.me/2022/04/27/FL-Studio-Tips-%E5%88%A9%E7%94%A8LFO-LFO-Speed%E5%81%9A%E5%87%BA%E5%8A%A0%E8%8A%B1%E6%95%88%E6%9E%9C/</id>
     <published>2022-04-26T16:00:00.000Z</published>
-    <updated>2022-10-30T03:56:18.149Z</updated>
+    <updated>2023-01-09T22:41:30.842Z</updated>
     
     
     <summary type="html">&lt;p&gt;&lt;img src=&quot;/../../../img/FL-Studio-Tips-LFO-Speed/cover.png&quot; alt=&quot;封面&quot; title=&quot;Cover&quot;&gt;&lt;/p&gt;
@@ -75,7 +107,7 @@
     <link href="https://blog.romichan.me/2022/04/17/hello-world/"/>
     <id>https://blog.romichan.me/2022/04/17/hello-world/</id>
     <published>2022-04-16T16:00:00.000Z</published>
-    <updated>2022-10-30T03:59:10.775Z</updated>
+    <updated>2023-01-09T22:41:30.823Z</updated>
     
     
       
@@ -96,7 +128,7 @@
     <link href="https://blog.romichan.me/2000/01/01/%E5%8F%98%E6%9B%B4%E8%AE%B0%E5%BD%95/"/>
     <id>https://blog.romichan.me/2000/01/01/%E5%8F%98%E6%9B%B4%E8%AE%B0%E5%BD%95/</id>
     <published>1999-12-31T16:00:00.000Z</published>
-    <updated>2022-10-30T03:59:45.973Z</updated>
+    <updated>2023-01-09T22:41:30.843Z</updated>
     
     
       
