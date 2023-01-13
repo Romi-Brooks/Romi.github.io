@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="blog romi music linux" />
+       
+      <meta name="description" content="Romi Brooks blog" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>利用JACK , 玩转 Reaper For Linux |  Romi</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="Romi" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-利用JACK , 玩转 Reaper For Linux"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  利用JACK , 玩转 Reaper For Linux
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/10/28/%E5%88%A9%E7%94%A8JACK%20,%20%E7%8E%A9%E8%BD%AC%20Reaper%20For%20Linux/" class="article-date">
+  <time datetime="2022-10-27T16:00:00.000Z" itemprop="datePublished">2022-10-28</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Music/">Music</a> / <a class="article-category-link" href="/categories/Music/Linux/">Linux</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">4 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><img src="/../../../img/JACK-Reaper-For-Linux/Cover.png" alt="封面" title="Cover"></p>
+<audio id="audio" controls="" preload="none">
+    <source id="mp3" src="../../../../music/JACK-Reaper-For-Linux/GoldClassAudio-SamplePack.mp3">
+</audio>  
+
+<p>您可以点击上方的“播放按钮”，来听上图所截得的几首EDM Progressive House (注意音量)<br><em>（音乐来自：Gold Class Audio出品的Sample Pack：Main Progressive House中Full Track Preview）</em>  </p>
+<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>笔者在这里用的 Linux 发行版是 <code>Arch Linux</code> , 并且使用 <a target="_blank" rel="noopener" href="https://www.reaper.fm/">Reaper 官网</a> 所提供的 <code>Linux x86_64</code> 版本。  </p>
+<p>不同的系统有不同的操作方式,但是大体逻辑是一样的。这篇Post的目的在于成功的利用Jack在Linux上运行daw。并且由于Reaper在linux有提供Build包,所以我们应当首选Reaper来作为我们要使用的Daw，这样会节省很多时间。  </p>
+<span id="more"></span>
+<p><del>那么现在，我们开始⑧！</del></p>
+<h1 id="1-安装，启动并设定JACK2"><a href="#1-安装，启动并设定JACK2" class="headerlink" title="1.安装，启动并设定JACK2"></a>1.安装，启动并设定<code>JACK2</code></h1><blockquote>
+<p>参考： <a target="_blank" rel="noopener" href="https://anclark.github.io/2020/12/08/Linux_Audio_Production/Make_Your_ArchLinux_An_Audio_Workstation_01/">把Arch Linux打造成音乐工作站</a>  </p>
+</blockquote>
+<p><code>JACK</code> 分为两个版本，分别是：</p>
+<ul>
+<li><code>JACK1</code> 由C编写，这是最初的版本</li>
+<li><code>JACK2</code> 由C++重写</li>
+</ul>
+<p><code>JACK2</code>相比<code>JACK1</code>来说，要方便配置很多，它不需要配置多的用户权限就可以使用，并且可以把<code>PulseAudio</code>,<code>ALSA</code> 桥接到 <code>JACK2</code> 。并且如果你之前在Windows体验过被ASIO4ALL所独占声卡的悲痛，那么<code>JACK1</code>也是如此。<br>所以我们果断选择<code>JACK2</code>。  </p>
+<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><h3 id="打开您的Terminal，首先安装JACK2主程序："><a href="#打开您的Terminal，首先安装JACK2主程序：" class="headerlink" title="打开您的Terminal，首先安装JACK2主程序："></a>打开您的Terminal，首先安装<code>JACK2</code>主程序：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S jack2</span><br></pre></td></tr></table></figure>
+<h3 id="根据需求安装您需要桥接到JACK2的接口："><a href="#根据需求安装您需要桥接到JACK2的接口：" class="headerlink" title="根据需求安装您需要桥接到JACK2的接口："></a>根据需求安装您需要桥接到<code>JACK2</code>的接口：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S pulseaudio-jack <span class="comment">#这是PulseAudio -&gt; JACK2</span></span><br><span class="line">$ sudo pacman -S zita-ajbridge   <span class="comment">#这是ALSA -&gt; JACK2</span></span><br></pre></td></tr></table></figure>
+<h3 id="安装Cadence来托管JACK2："><a href="#安装Cadence来托管JACK2：" class="headerlink" title="安装Cadence来托管JACK2："></a>安装<code>Cadence</code>来托管<code>JACK2</code>：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S cadence</span><br></pre></td></tr></table></figure>
+<h3 id="添加您到audio用户组："><a href="#添加您到audio用户组：" class="headerlink" title="添加您到audio用户组："></a>添加您到<code>audio</code>用户组：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo usermod --append -G audio username  <span class="comment">#其中username是您的用户名</span></span><br></pre></td></tr></table></figure>
+<h3 id="Final-Step："><a href="#Final-Step：" class="headerlink" title="Final Step："></a>Final Step：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ reboot</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-启动并设定JACK2"><a href="#2-启动并设定JACK2" class="headerlink" title="2.启动并设定JACK2"></a>2.启动并设定<code>JACK2</code></h2><h3 id="启动-Cadence，通常来说，它安装到了您的桌面，只需要搜索就可以启动它。"><a href="#启动-Cadence，通常来说，它安装到了您的桌面，只需要搜索就可以启动它。" class="headerlink" title="启动 Cadence，通常来说，它安装到了您的桌面，只需要搜索就可以启动它。"></a>启动 <code>Cadence</code>，通常来说，它安装到了您的桌面，只需要搜索就可以启动它。</h3><p><img src="/../../../img/JACK-Reaper-For-Linux/1.png" alt="1.2.1" title="1.2.1"></br></p>
+<h3 id="点击-JACK-Bridges-中的-Bridge-Type-来设定桥接-（这里根据您所安装的接口来选择，我选择了ALSA-gt-JACK）："><a href="#点击-JACK-Bridges-中的-Bridge-Type-来设定桥接-（这里根据您所安装的接口来选择，我选择了ALSA-gt-JACK）：" class="headerlink" title="点击 JACK Bridges 中的 Bridge Type 来设定桥接 （这里根据您所安装的接口来选择，我选择了ALSA -&gt; JACK）："></a>点击 <code>JACK Bridges</code> 中的 <code>Bridge Type</code> 来设定桥接 （这里根据您所安装的接口来选择，我选择了<code>ALSA -&gt; JACK</code>）：</h3><p><img src="/../../../img/JACK-Reaper-For-Linux/2.png" alt="1.2.2" title="1.2.2"></br></p>
+<h3 id="点击-JACK-Status-中的-Configure-来配置桥接-（您设定的桥接是什么接口就选择什么Driver）："><a href="#点击-JACK-Status-中的-Configure-来配置桥接-（您设定的桥接是什么接口就选择什么Driver）：" class="headerlink" title="点击 JACK Status 中的 Configure 来配置桥接 （您设定的桥接是什么接口就选择什么Driver）："></a>点击 <code>JACK Status</code> 中的 <code>Configure</code> 来配置桥接 （您设定的桥接是什么接口就选择什么<code>Driver</code>）：</h3><p><img src="/../../../img/JACK-Reaper-For-Linux/3.png" alt="1.2.3" title="1.2.3"></br></p>
+<h3 id="点击OK-退回到主界面之后点击Start即可启动JACK2。（您也可以点击Auto-start-JACK-or-LADISH-at-login来登陆自动启动JACK2）："><a href="#点击OK-退回到主界面之后点击Start即可启动JACK2。（您也可以点击Auto-start-JACK-or-LADISH-at-login来登陆自动启动JACK2）：" class="headerlink" title="点击OK 退回到主界面之后点击Start即可启动JACK2。（您也可以点击Auto-start JACK or LADISH at login来登陆自动启动JACK2）："></a>点击<code>OK</code> 退回到主界面之后点击<code>Start</code>即可启动<code>JACK2</code>。（您也可以点击<code>Auto-start JACK or LADISH at login</code>来登陆自动启动<code>JACK2</code>）：</h3><p><img src="/../../../img/JACK-Reaper-For-Linux/4.png" alt="1.2.4" title="1.2.4"></br><br>看到<code>JACK Status</code> 中的 <code>Server Status</code> 是<code>Start</code>就说明 <code>Cadence</code>已经托管了<code>JACK2</code>并且<code>JACK2</code>也桥接了我们的音频设备。（后续您就可以为<code>Cadence</code>添加自启动项，这样一开机音频驱动就会自动桥接到JACK2啦）</p>
+<h1 id="2-安装，启动并配置Reaper"><a href="#2-安装，启动并配置Reaper" class="headerlink" title="2.安装，启动并配置Reaper"></a>2.安装，启动并配置<code>Reaper</code></h1><h2 id="1-安装-1"><a href="#1-安装-1" class="headerlink" title="1.安装"></a>1.安装</h2><h3 id="首先去-Reaper的官网-然后点击DOWNLOAD-REAPER-来下载Reaper："><a href="#首先去-Reaper的官网-然后点击DOWNLOAD-REAPER-来下载Reaper：" class="headerlink" title="首先去 Reaper的官网 然后点击DOWNLOAD REAPER 来下载Reaper："></a>首先去 <a target="_blank" rel="noopener" href="https://www.reaper.fm/">Reaper的官网</a> 然后点击<code>DOWNLOAD REAPER</code> 来下载<code>Reaper</code>：</h3><blockquote>
+<p>此处根据您的系统架构选择版本（<code>一般选择Linux x86_64</code>）：  </p>
+</blockquote>
+<h3 id="解压-进入主程序目录："><a href="#解压-进入主程序目录：" class="headerlink" title="解压,进入主程序目录："></a>解压,进入主程序目录：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tar -xvf reaper669_linux_x86_64.tar.xz &amp;&amp; <span class="built_in">rm</span> reaper669_linux_x86_64.tar.xz &amp;&amp; <span class="built_in">cd</span> reaper669_linux_x86_64  <span class="comment">#注意，这里669根据版本号来自行更改哦</span></span><br></pre></td></tr></table></figure>
+<h3 id="在当前目录执行安装脚本："><a href="#在当前目录执行安装脚本：" class="headerlink" title="在当前目录执行安装脚本："></a>在当前目录执行安装脚本：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">chmod</span> +x install-reaper.sh</span><br><span class="line">$ ./install-reaper.sh  </span><br></pre></td></tr></table></figure>
+<p>输入<code>I</code>，之后<code>Reaper</code>会被安装到<code>～/opt/REAPER/</code>目录下</p>
+<h3 id="软连接到-usr-bin"><a href="#软连接到-usr-bin" class="headerlink" title="软连接到/usr/bin"></a>软连接到<code>/usr/bin</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo <span class="built_in">ln</span> -s /home/username/opt/REAPER/reaper /usr/bin/reaper  <span class="comment">#其中username是您的用户名</span></span><br></pre></td></tr></table></figure>
+<h3 id="写Desktop-File以便于从桌面启动："><a href="#写Desktop-File以便于从桌面启动：" class="headerlink" title="写Desktop File以便于从桌面启动："></a>写<code>Desktop File</code>以便于从桌面启动：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /usr/share/applications/reaper.desktop</span><br></pre></td></tr></table></figure>
+<p>按<code>I</code>进入插入模式，输入：</p>
+<pre><code class="bash">[Desktop Entry]  
+Name=Reaper  
+Comment=A Complete Digital Audio Production Application For Linux  
+Exec=/usr/bin/reaper  
+Icon=/home/username/opt/Reaper/reaper.png  #您需要去下载一个reaper的Icon移动到这里，其中username是您的用户名  
+Terminal=false  
+Type=Application  
+Categories=Music;
+</code></pre>
+<h3 id="现在您搜索Reaper应该就有匹配项了（如果没有，您可能需要等一小会儿）"><a href="#现在您搜索Reaper应该就有匹配项了（如果没有，您可能需要等一小会儿）" class="headerlink" title="现在您搜索Reaper应该就有匹配项了（如果没有，您可能需要等一小会儿）"></a>现在您搜索<code>Reaper</code>应该就有匹配项了（如果没有，您可能需要等一小会儿）</h3><h2 id="2-启动并配置Reaper"><a href="#2-启动并配置Reaper" class="headerlink" title="2.启动并配置Reaper"></a>2.启动并配置<code>Reaper</code></h2><h3 id="打开Reaper，无论您是从命令行启动，还是桌面启动"><a href="#打开Reaper，无论您是从命令行启动，还是桌面启动" class="headerlink" title="打开Reaper，无论您是从命令行启动，还是桌面启动"></a>打开<code>Reaper</code>，无论您是从命令行启动，还是桌面启动</h3><h3 id="等待几秒的许可证要求窗口，然后点击Still-Evaluating"><a href="#等待几秒的许可证要求窗口，然后点击Still-Evaluating" class="headerlink" title="等待几秒的许可证要求窗口，然后点击Still Evaluating"></a>等待几秒的许可证要求窗口，然后点击<code>Still Evaluating</code></h3><p><img src="/../../../img/JACK-Reaper-For-Linux/5.png" alt="2.2.1" title="2.2.1"></br></p>
+<blockquote>
+<p><code>Reaper</code>是一款轻量强大的DAW，如果您觉得它还不错，并且您已经在Windows使用Reaper许久，却还没有注册license的话，请支持制作商<code>Cockos</code>，买一份<code>Reaper</code>的License吧！</p>
+</blockquote>
+<h3 id="点击Options-gt-Preferences-gt-Audio-gt-Device，选择Audio-system-gt-JACK，然后Apply即可。"><a href="#点击Options-gt-Preferences-gt-Audio-gt-Device，选择Audio-system-gt-JACK，然后Apply即可。" class="headerlink" title="点击Options-&gt;Preferences-&gt;Audio-&gt;Device，选择Audio system-&gt;JACK，然后Apply即可。"></a>点击<code>Options-&gt;Preferences-&gt;Audio-&gt;Device</code>，选择<code>Audio system</code>-&gt;<code>JACK</code>，然后<code>Apply</code>即可。</h3><p><img src="/../../../img/JACK-Reaper-For-Linux/6.png" alt="2.2.2" title="2.2.3"></br></p>
+<h3 id="恭喜您，配置完成了！现在开始Reaper已经以JACK2为音频驱动，为您工作了！"><a href="#恭喜您，配置完成了！现在开始Reaper已经以JACK2为音频驱动，为您工作了！" class="headerlink" title="恭喜您，配置完成了！现在开始Reaper已经以JACK2为音频驱动，为您工作了！"></a>恭喜您，配置完成了！现在开始<code>Reaper</code>已经以<code>JACK2</code>为音频驱动，为您工作了！</h3><h1 id="Wait…-Somethings-is-Wrong…"><a href="#Wait…-Somethings-is-Wrong…" class="headerlink" title="Wait…. Somethings is Wrong…"></a>Wait…. Somethings is Wrong…</h1><p>你有没有发现，我在封面展示的那张图中，显示了中文，但是当您兴冲冲的开始自己的Linux音乐之路的时候，发现您的输入中文或者是其它字符时却出现了方块！</p>
+<h2 id="这个问题的解决方法来自Cockos-REAPER-中文群的大佬Tee"><a href="#这个问题的解决方法来自Cockos-REAPER-中文群的大佬Tee" class="headerlink" title="这个问题的解决方法来自Cockos REAPER 中文群的大佬Tee"></a>这个问题的解决方法来自<code>Cockos REAPER 中文群</code>的大佬<a target="_blank" rel="noopener" href="https://lado.me/">Tee</a></h2><blockquote>
+<p>原帖地址是这里：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/364000143">如何在Linux REAPER里显示中文</a></p>
+</blockquote>
+<pre><code class="bash">sudo vim /etc/fonts/fonts.conf
+</code></pre>
+<p>按下<code>I</code>，插入以下内容：  </p>
+<pre><code class="bash">    &lt;!-- REAPER fonts patch --&gt;
+    &lt;match target=&quot;pattern&quot;&gt;
+      &lt;test name=&quot;prgname&quot;&gt;
+       &lt;string&gt;reaper&lt;/string&gt;
+    &lt;/test&gt;
+      &lt;edit name=&quot;family&quot; mode=&quot;assign&quot;&gt;
+       &lt;string&gt;Noto Sans CJK SC&lt;/string&gt;
+      &lt;/edit&gt;
+    &lt;/match&gt;  
+</code></pre>
+<p>注意插入的位置，位于 <strong>fontconfig标签之间。</strong> 这里涉及系统文件，请务必小心。</p>
+<h3 id="现在输入中文，它的显示就会正常了！"><a href="#现在输入中文，它的显示就会正常了！" class="headerlink" title="现在输入中文，它的显示就会正常了！"></a>现在输入中文，它的显示就会正常了！</h3><h2 id="在最后的最后，感恩。"><a href="#在最后的最后，感恩。" class="headerlink" title="在最后的最后，感恩。"></a><center>在最后的最后，感恩。</center></h2>   <p align="right">Romi Brooks♥</p> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://blog.romichan.me/2022/10/28/%E5%88%A9%E7%94%A8JACK%20,%20%E7%8E%A9%E8%BD%AC%20Reaper%20For%20Linux/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Reaper/" rel="tag">Reaper</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/01/09/Archlinux%20+%20U%E7%9B%98%20%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Archlinux + U盘 打造随身系统盘
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/04/27/FL-Studio-Tips-%E5%88%A9%E7%94%A8LFO-LFO-Speed%E5%81%9A%E5%87%BA%E5%8A%A0%E8%8A%B1%E6%95%88%E6%9E%9C/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">FL Studio Tips: 通过控制LFO Speed，使你的音乐更有律动</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "E3Le9vxopO9hFy1XDqS2lgLl-gzGzoHsz",
+    app_key: "5LGLOs5GpcbHfzVajrF6FQfl",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "评论",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> Romi Brooks
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Romi"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+ 
+<script src="/js/clickLove.js"></script>
+ 
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":false},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

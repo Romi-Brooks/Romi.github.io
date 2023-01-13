@@ -1,122 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Archlinux + U盘 打造随身系统盘</title>
-    <url>/2023/01/09/Archlinux%20+%20U%E7%9B%98%20%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/</url>
-    <content><![CDATA[<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/Cover.jpg" alt="封面" title="Cover"></p>
-<h1 id="最后一次编辑时间：2023-01-10-0-51"><a href="#最后一次编辑时间：2023-01-10-0-51" class="headerlink" title="最后一次编辑时间：2023-01-10 0:51"></a>最后一次编辑时间：2023-01-10 0:51</h1><center>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1393318072&auto=0&height=66"></iframe>
-
-
-<p><em>Music：<a href="https://music.163.com/#/song?id=1393318072&userid=1369186144">Fractal</a> by <a href="https://music.163.com/#/artist?id=742233">Tinlicker</a></em>  </p>
-</center>   
-
-<blockquote>
-<p>参考文献<br>1.一个完整的Arch Linux 安装流程：<a href="https://zhuanlan.zhihu.com/p/513859236">2022.5 archlinux详细安装过程</a><br>2.在可移动介质上安装Arch Linux：<a href="https://wiki.archlinux.org/title/Install_Arch_Linux_on_a_removable_medium">Install Arch Linux on a removable medium</a><br>3.i3wm配置：<a href="https://blog.csdn.net/r8l8q8/article/details/103889972">ArchLinux下i3wm简单配置和美化</a><br>4.i3wm配置：<a href="https://segmentfault.com/a/1190000022083424">一份自用的简单i3wm配置</a>  </p>
-</blockquote>
-<p>你的U盘通常要在32G以此来使用较好的图形化功能。<br>本文是一个自用的Arch Linux安装方法，针对的是我自己，如果你看到这个文章了，里头可能有一些东西你是可以用到的。这篇文章旨在帮助不会安装Arch Linux的用户，以及当我自己遗忘某些安装细节时可以回过头来查看。  </p>
-<span id="more"></span>
-<p><del>Start</del></p>
-<h1 id="安装Arch-Linux"><a href="#安装Arch-Linux" class="headerlink" title="安装Arch Linux"></a>安装Arch Linux</h1><h2 id="引导，分区，调整，安装："><a href="#引导，分区，调整，安装：" class="headerlink" title="引导，分区，调整，安装："></a>引导，分区，调整，安装：</h2><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.1.png" alt="1.1.1" title="1.1.1">  </p>
-<h3 id="确保使用UEFI引导："><a href="#确保使用UEFI引导：" class="headerlink" title="确保使用UEFI引导："></a>确保使用UEFI引导：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> /sys/firmware/efi/efivars</span><br></pre></td></tr></table></figure>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.2.png" alt="1.1.2" title="1.1.2"><br>输入这一行代码后，如果反馈目录不存在，不要继续，因为没有UEFI启动在后面写入引导的时候几乎绝对报错。如果有输出，说明电脑是以UEFI启动的。  </p>
-<blockquote>
-<p>Tips: 写入image用<code>Rufus</code>，这就是使用U盘安装。如果是没有多出来的U盘，则可以用虚拟机环境。</p>
-</blockquote>
-<h3 id="联网："><a href="#联网：" class="headerlink" title="联网："></a>联网：</h3><p>1.输入“iwctl”进入iwd模式，也就是终端最前方有“[iwd]#”字样。<br>2.在iwd模式下输入“device list”，查询电脑的网卡。记住你的网卡号，一般是wlan0或者wlan1（本文以多数情况wlan0为例）<br>3.在iwd模式下输入“station wlan0 scan”，然后再输入“station wlan0 get-networks”，显示周围的wifi的ssid扫描结果。<br>4.在iwd模式下输入“station wlan0 connect <ssid>”，如果是加密的wifi，系统会提示输入wifi密码，如无意外，就连上网了。<br>5.验证联网。按ctrl+c退出iwd模式，回到[root@archiso~]模式，输入“ping baidu.com”，如果有返回数据，说明已经连上网了。  </p>
-<blockquote>
-<p>一般来说，如果是网线直连，那么系统会自动连接网络，而不用使用iwd连接wifi。</p>
-</blockquote>
-<h3 id="更新时间："><a href="#更新时间：" class="headerlink" title="更新时间："></a>更新时间：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">timedatectl set-ntp <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="分区："><a href="#分区：" class="headerlink" title="分区："></a>分区：</h3><blockquote>
-<p>涉及数据相关，请认真对待！</p>
-</blockquote>
-<h4 id="这里列出的是当前所有硬盘，找到你的硬盘，我这里是-x2F-dev-x2F-sda"><a href="#这里列出的是当前所有硬盘，找到你的硬盘，我这里是-x2F-dev-x2F-sda" class="headerlink" title="这里列出的是当前所有硬盘，找到你的硬盘，我这里是&#x2F;dev&#x2F;sda"></a>这里列出的是当前所有硬盘，找到你的硬盘，我这里是&#x2F;dev&#x2F;sda</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">lsblk</span><br></pre></td></tr></table></figure>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.3.png" alt="1.1.3" title="1.1.3">  </p>
-<h4 id="进-x2F-dev-x2F-sda分盘"><a href="#进-x2F-dev-x2F-sda分盘" class="headerlink" title="进&#x2F;dev&#x2F;sda分盘"></a>进&#x2F;dev&#x2F;sda分盘</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cfdisk /dev/sda</span><br></pre></td></tr></table></figure>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.4.png" alt="1.1.4" title="1.1.4">  </p>
-<h4 id="gpt分区表，回车就行"><a href="#gpt分区表，回车就行" class="headerlink" title="gpt分区表，回车就行"></a>gpt分区表，回车就行</h4><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.5.png" alt="1.1.5" title="1.1.5">  </p>
-<h4 id="用New新建分区，大小自定义，按照你自己来"><a href="#用New新建分区，大小自定义，按照你自己来" class="headerlink" title="用New新建分区，大小自定义，按照你自己来"></a>用New新建分区，大小自定义，按照你自己来</h4><blockquote>
-<p>sda1 -&gt; 1G boot分区<br>sda2 -&gt; 2G swap分区  （不要swap你就不分，我使用下来是没有问题的）<br>sda3 -&gt; 37G &#x2F;分区<br>sda4 -&gt; 20G &#x2F;home分区  </p>
-</blockquote>
-<h4 id="用Write，然后输入yes写入分区"><a href="#用Write，然后输入yes写入分区" class="headerlink" title="用Write，然后输入yes写入分区"></a>用Write，然后输入yes写入分区</h4><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.6.png" alt="1.1.6" title="1.1.6">  </p>
-<h4 id="用Quit退出，然后lsblk看分的是否正确"><a href="#用Quit退出，然后lsblk看分的是否正确" class="headerlink" title="用Quit退出，然后lsblk看分的是否正确"></a>用Quit退出，然后lsblk看分的是否正确</h4><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.7.png" alt="1.1.7" title="1.1.7">  </p>
-<h4 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkfs.fat -F32 /dev/sda1</span><br><span class="line">mkfs.ext4 /dev/sda3</span><br><span class="line">mkfs.xfs /dev/sda4</span><br><span class="line">mkswap /dev/sda2</span><br><span class="line">swapon /dev/sda2</span><br></pre></td></tr></table></figure>
-
-<h4 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mount /dev/sda3 /mnt</span><br><span class="line"><span class="built_in">mkdir</span> -p /mnt/boot/efi</span><br><span class="line">mount /dev/sda1 /mnt/boot/efi</span><br><span class="line"><span class="built_in">mkdir</span> /mnt/home</span><br><span class="line">mount /dev/sda4 /mnt/home</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>确保分区挂载正确，这里的参考应该是上文你所创建的分区！</p>
-</blockquote>
-<h4 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h4><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.8.png" alt="1.1.8" title="1.1.8">  </p>
-<h3 id="配置pacman"><a href="#配置pacman" class="headerlink" title="配置pacman"></a>配置pacman</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/pacman.d/mirrors</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>无论这个页面的内容是什么，只需要无脑修改第一条为<br>Server &#x3D; <a href="https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch">https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch</a>  </p>
-</blockquote>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.9.png" alt="1.1.9" title="1.1.9">  </p>
-<h4 id="先同步数据包，不升级"><a href="#先同步数据包，不升级" class="headerlink" title="先同步数据包，不升级"></a>先同步数据包，不升级</h4><blockquote>
-<p>注意，不升级！  </p>
-</blockquote>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.10.png" alt="1.1.10" title="1.1.10">  </p>
-<h4 id="安装archlinux-keyring防止签名出现问题"><a href="#安装archlinux-keyring防止签名出现问题" class="headerlink" title="安装archlinux-keyring防止签名出现问题"></a>安装<code>archlinux-keyring</code>防止签名出现问题</h4><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.11.png" alt="1.1.11" title="1.1.11">  </p>
-<h3 id="安装系统到U盘"><a href="#安装系统到U盘" class="headerlink" title="安装系统到U盘"></a>安装系统到U盘</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pacstrap /mnt base linux-lts linux-lts-headers linux-firmware base-devel</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>我安装的是lts内核，如果不需要lts内核，那就去掉<code>-lts</code>即可。  </p>
-</blockquote>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.12.png" alt="1.1.12" title="1.1.12"> </p>
-<p>~~ btw，这里如果u盘IO不怎么地，那可能会巨慢…. ~~ </p>
-<h4 id="写分区表"><a href="#写分区表" class="headerlink" title="写分区表"></a>写分区表</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br><span class="line"><span class="built_in">cat</span> /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>这里<code>-U</code>是指使用uuid挂载硬盘，因为你使用U盘装系统所面临的问题可能有硬盘序号变化，因此我们使用uuid来避免这个问题。  </p>
-</blockquote>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.13.png" alt="1.1.13" title="1.1.13">   </p>
-<h4 id="chroot"><a href="#chroot" class="headerlink" title="chroot"></a>chroot</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.14.png" alt="1.1.14" title="1.1.14">  </p>
-<h4 id="安装必要软件"><a href="#安装必要软件" class="headerlink" title="安装必要软件"></a>安装必要软件</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pacman -S neovim iwd ttf-dejavu sudo bluez usbmuxd networkmanager dhcpcd wqy-zenhei ntfs-3g</span><br></pre></td></tr></table></figure>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.15.png" alt="1.1.15" title="1.1.15">  </p>
-<h4 id="软连接neovim到vim"><a href="#软连接neovim到vim" class="headerlink" title="软连接neovim到vim"></a>软连接neovim到vim</h4><blockquote>
-<p>这何尝不是一种ntr(  </p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /bin/nvim /bin/vim</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.16.png" alt="1.1.16" title="1.1.16">  </p>
-<h4 id="同步时区"><a href="#同步时区" class="headerlink" title="同步时区"></a>同步时区</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">hwclock --systohc</span><br></pre></td></tr></table></figure>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.17.png" alt="1.1.17" title="1.1.17">  </p>
-<h4 id="语言上的设置"><a href="#语言上的设置" class="headerlink" title="语言上的设置"></a>语言上的设置</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/locale.gen</span><br></pre></td></tr></table></figure>
-<p>这里取消掉<code>en_US.UTF-8</code> , <code>zh_CN.UTF-8</code> , <code>zh_TW.UTF-8</code> ，这几个地方的注释<br>也就是前面的<code>#</code>号  </p>
-<p>然后生成语言文件：  </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">locale-gen</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">![1.1.18]( ../../../img/Archlinux-U盘-打造随身系统盘/1.1.18.png <span class="string">&quot;1.1.18&quot;</span>)  </span><br><span class="line"></span><br><span class="line"><span class="comment">#### 追加 `当前系统语言` 到系统文件</span></span><br><span class="line">``` bash</span><br><span class="line"><span class="built_in">echo</span> LANG=en_US.UTF-8 &gt;&gt; /etc/locale.conf</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.19.png" alt="1.1.19" title="1.1.19">  </p>
-<h4 id="设定root密码"><a href="#设定root密码" class="headerlink" title="设定root密码"></a>设定<code>root</code>密码</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.20.png" alt="1.1.20" title="1.1.20">  </p>
-<h4 id="主机名"><a href="#主机名" class="headerlink" title="主机名"></a>主机名</h4><blockquote>
-<p>设定成你自己喜欢的  </p>
-</blockquote>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.21.png" alt="1.1.21" title="1.1.21">  </p>
-<h4 id="本地回环"><a href="#本地回环" class="headerlink" title="本地回环"></a>本地回环</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
-
-<p>添加以下内容</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1 localhost</span><br><span class="line">::1 localhost</span><br><span class="line">127.0.1.1 livearch.localdomain livearch  <span class="comment">#跟着上一步改</span></span><br></pre></td></tr></table></figure>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.22.png" alt="1.1.22" title="1.1.22">  </p>
-<h4 id="安装引导"><a href="#安装引导" class="headerlink" title="安装引导"></a>安装引导</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pacman -S grub efibootmgr</span><br></pre></td></tr></table></figure>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.23.png" alt="1.1.23" title="1.1.23">  </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">grub-install /dev/sda</span><br></pre></td></tr></table></figure>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.24.png" alt="1.1.24" title="1.1.24">  </p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.25.png" alt="1.1.25" title="1.1.25">  </p>
-<h4 id="hook微调"><a href="#hook微调" class="headerlink" title="hook微调"></a>hook微调</h4><p>将 <code>block</code> 和 <code>keyboard</code> 放置在 <code>autodetect</code> 之前<br><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.27.png" alt="1.1.27" title="1.1.27">  </p>
-<h4 id="退出，卸载，重启"><a href="#退出，卸载，重启" class="headerlink" title="退出，卸载，重启"></a>退出，卸载，重启</h4><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.26.png" alt="1.1.26" title="1.1.26">  </p>
-<h1 id="未完…"><a href="#未完…" class="headerlink" title="未完…."></a>未完….</h1><h2 id="在最后的最后，感恩。"><a href="#在最后的最后，感恩。" class="headerlink" title="在最后的最后，感恩。"></a><center>在最后的最后，感恩。</center></h2>   <p align="right">Romi Brooks♥</p>]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Archlinux</tag>
-        <tag>Installation</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>FL Studio Tips: 通过控制LFO Speed，使你的音乐更有律动</title>
     <url>/2022/04/27/FL-Studio-Tips-%E5%88%A9%E7%94%A8LFO-LFO-Speed%E5%81%9A%E5%87%BA%E5%8A%A0%E8%8A%B1%E6%95%88%E6%9E%9C/</url>
     <content><![CDATA[<p><img src="/../../../img/FL-Studio-Tips-LFO-Speed/cover.png" alt="封面" title="Cover"></p>
@@ -193,6 +77,128 @@
       </tags>
   </entry>
   <entry>
+    <title>Archlinux + U盘 打造随身系统盘</title>
+    <url>/2023/01/09/Archlinux%20+%20U%E7%9B%98%20%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/</url>
+    <content><![CDATA[<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/Cover.jpg" alt="封面" title="Cover"></p>
+<h1 id="最后一次编辑时间：2023-01-10-0-51"><a href="#最后一次编辑时间：2023-01-10-0-51" class="headerlink" title="最后一次编辑时间：2023-01-10 0:51"></a>最后一次编辑时间：2023-01-10 0:51</h1><center>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1393318072&auto=0&height=66"></iframe>
+
+
+<p><em>Music：<a href="https://music.163.com/#/song?id=1393318072&userid=1369186144">Fractal</a> by <a href="https://music.163.com/#/artist?id=742233">Tinlicker</a></em>  </p>
+</center>   
+
+<blockquote>
+<p>参考文献<br>1.一个完整的Arch Linux 安装流程：<a href="https://zhuanlan.zhihu.com/p/513859236">2022.5 archlinux详细安装过程</a><br>2.在可移动介质上安装Arch Linux：<a href="https://wiki.archlinux.org/title/Install_Arch_Linux_on_a_removable_medium">Install Arch Linux on a removable medium</a><br>3.i3wm配置：<a href="https://blog.csdn.net/r8l8q8/article/details/103889972">ArchLinux下i3wm简单配置和美化</a><br>4.i3wm配置：<a href="https://segmentfault.com/a/1190000022083424">一份自用的简单i3wm配置</a>  </p>
+</blockquote>
+<p>你的U盘通常要在32G以此来使用较好的图形化功能。<br>本文是一个自用的Arch Linux安装方法，针对的是我自己，如果你看到这个文章了，里头可能有一些东西你是可以用到的。这篇文章旨在帮助不会安装Arch Linux的用户，以及当我自己遗忘某些安装细节时可以回过头来查看。  </p>
+<span id="more"></span>
+<p><del>Start</del></p>
+<h1 id="安装Arch-Linux"><a href="#安装Arch-Linux" class="headerlink" title="安装Arch Linux"></a>安装Arch Linux</h1><h2 id="引导，分区，调整，安装："><a href="#引导，分区，调整，安装：" class="headerlink" title="引导，分区，调整，安装："></a>引导，分区，调整，安装：</h2><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.1.png" alt="1.1.1" title="1.1.1">  </p>
+<h3 id="确保使用UEFI引导："><a href="#确保使用UEFI引导：" class="headerlink" title="确保使用UEFI引导："></a>确保使用UEFI引导：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ls</span> /sys/firmware/efi/efivars</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.2.png" alt="1.1.2" title="1.1.2"><br>输入这一行代码后，如果反馈目录不存在，不要继续，因为没有UEFI启动在后面写入引导的时候几乎绝对报错。如果有输出，说明电脑是以UEFI启动的。  </p>
+<blockquote>
+<p>Tips: 写入image用<code>Rufus</code>，这就是使用U盘安装。如果是没有多出来的U盘，则可以用虚拟机环境。</p>
+</blockquote>
+<h3 id="联网："><a href="#联网：" class="headerlink" title="联网："></a>联网：</h3><p>1.输入“iwctl”进入iwd模式，也就是终端最前方有“[iwd]#”字样。<br>2.在iwd模式下输入“device list”，查询电脑的网卡。记住你的网卡号，一般是wlan0或者wlan1（本文以多数情况wlan0为例）<br>3.在iwd模式下输入“station wlan0 scan”，然后再输入“station wlan0 get-networks”，显示周围的wifi的ssid扫描结果。<br>4.在iwd模式下输入“station wlan0 connect <ssid>”，如果是加密的wifi，系统会提示输入wifi密码，如无意外，就连上网了。<br>5.验证联网。按ctrl+c退出iwd模式，回到[root@archiso~]模式，输入“ping baidu.com”，如果有返回数据，说明已经连上网了。  </p>
+<blockquote>
+<p>一般来说，如果是网线直连，那么系统会自动连接网络，而不用使用iwd连接wifi。</p>
+</blockquote>
+<h3 id="更新时间："><a href="#更新时间：" class="headerlink" title="更新时间："></a>更新时间：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">timedatectl set-ntp <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="分区："><a href="#分区：" class="headerlink" title="分区："></a>分区：</h3><blockquote>
+<p>涉及数据相关，请认真对待！</p>
+</blockquote>
+<h4 id="这里列出的是当前所有硬盘，找到你的硬盘，我这里是-x2F-dev-x2F-sda"><a href="#这里列出的是当前所有硬盘，找到你的硬盘，我这里是-x2F-dev-x2F-sda" class="headerlink" title="这里列出的是当前所有硬盘，找到你的硬盘，我这里是&#x2F;dev&#x2F;sda"></a>这里列出的是当前所有硬盘，找到你的硬盘，我这里是&#x2F;dev&#x2F;sda</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">lsblk</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.3.png" alt="1.1.3" title="1.1.3">  </p>
+<h4 id="进-x2F-dev-x2F-sda分盘"><a href="#进-x2F-dev-x2F-sda分盘" class="headerlink" title="进&#x2F;dev&#x2F;sda分盘"></a>进&#x2F;dev&#x2F;sda分盘</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cfdisk /dev/sda</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.4.png" alt="1.1.4" title="1.1.4">  </p>
+<h4 id="gpt分区表，回车就行"><a href="#gpt分区表，回车就行" class="headerlink" title="gpt分区表，回车就行"></a>gpt分区表，回车就行</h4><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.5.png" alt="1.1.5" title="1.1.5">  </p>
+<h4 id="用New新建分区，大小自定义，按照你自己来"><a href="#用New新建分区，大小自定义，按照你自己来" class="headerlink" title="用New新建分区，大小自定义，按照你自己来"></a>用New新建分区，大小自定义，按照你自己来</h4><blockquote>
+<p>sda1 -&gt; 1G boot分区<br>sda2 -&gt; 2G swap分区  （不要swap你就不分，我使用下来是没有问题的）<br>sda3 -&gt; 37G &#x2F;分区<br>sda4 -&gt; 20G &#x2F;home分区  </p>
+</blockquote>
+<h4 id="用Write，然后输入yes写入分区"><a href="#用Write，然后输入yes写入分区" class="headerlink" title="用Write，然后输入yes写入分区"></a>用Write，然后输入yes写入分区</h4><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.6.png" alt="1.1.6" title="1.1.6">  </p>
+<h4 id="用Quit退出，然后lsblk看分的是否正确"><a href="#用Quit退出，然后lsblk看分的是否正确" class="headerlink" title="用Quit退出，然后lsblk看分的是否正确"></a>用Quit退出，然后lsblk看分的是否正确</h4><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.7.png" alt="1.1.7" title="1.1.7">  </p>
+<h4 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkfs.fat -F32 /dev/sda1</span><br><span class="line">mkfs.ext4 /dev/sda3</span><br><span class="line">mkfs.xfs /dev/sda4</span><br><span class="line">mkswap /dev/sda2</span><br><span class="line">swapon /dev/sda2</span><br></pre></td></tr></table></figure>
+
+<h4 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mount /dev/sda3 /mnt</span><br><span class="line"><span class="built_in">mkdir</span> -p /mnt/boot/efi</span><br><span class="line">mount /dev/sda1 /mnt/boot/efi</span><br><span class="line"><span class="built_in">mkdir</span> /mnt/home</span><br><span class="line">mount /dev/sda4 /mnt/home</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>确保分区挂载正确，这里的参考应该是上文你所创建的分区！</p>
+</blockquote>
+<h4 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h4><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.8.png" alt="1.1.8" title="1.1.8">  </p>
+<h3 id="配置pacman"><a href="#配置pacman" class="headerlink" title="配置pacman:"></a>配置pacman:</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/pacman.d/mirrors</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>无论这个页面的内容是什么，只需要无脑修改第一条为<br>Server &#x3D; <a href="https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch">https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch</a>  </p>
+</blockquote>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.9.png" alt="1.1.9" title="1.1.9">  </p>
+<h4 id="先同步数据包，不升级"><a href="#先同步数据包，不升级" class="headerlink" title="先同步数据包，不升级"></a>先同步数据包，不升级</h4><blockquote>
+<p>注意，不升级！  </p>
+</blockquote>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.10.png" alt="1.1.10" title="1.1.10">  </p>
+<h4 id="安装archlinux-keyring防止签名出现问题"><a href="#安装archlinux-keyring防止签名出现问题" class="headerlink" title="安装archlinux-keyring防止签名出现问题"></a>安装<code>archlinux-keyring</code>防止签名出现问题</h4><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.11.png" alt="1.1.11" title="1.1.11">  </p>
+<h3 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统:"></a>安装系统:</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pacstrap /mnt base linux-lts linux-lts-headers linux-firmware base-devel</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>我安装的是lts内核，如果不需要lts内核，那就去掉<code>-lts</code>即可。  </p>
+</blockquote>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.12.png" alt="1.1.12" title="1.1.12"> </p>
+<blockquote>
+<p>btw，这里如果u盘IO不怎么地，那可能会巨慢….</p>
+</blockquote>
+<h4 id="写分区表"><a href="#写分区表" class="headerlink" title="写分区表"></a>写分区表</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br><span class="line"><span class="built_in">cat</span> /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里<code>-U</code>是指使用uuid挂载硬盘，因为你使用U盘装系统所面临的问题可能有硬盘序号变化，因此我们使用uuid来避免这个问题。  </p>
+</blockquote>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.13.png" alt="1.1.13" title="1.1.13">   </p>
+<h4 id="chroot"><a href="#chroot" class="headerlink" title="chroot"></a>chroot</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.14.png" alt="1.1.14" title="1.1.14">  </p>
+<h4 id="安装必要软件"><a href="#安装必要软件" class="headerlink" title="安装必要软件"></a>安装必要软件</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pacman -S neovim iwd ttf-dejavu sudo bluez usbmuxd networkmanager dhcpcd wqy-zenhei ntfs-3g</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.15.png" alt="1.1.15" title="1.1.15">  </p>
+<h4 id="软连接neovim到vim"><a href="#软连接neovim到vim" class="headerlink" title="软连接neovim到vim"></a>软连接neovim到vim</h4><blockquote>
+<p>这何尝不是一种ntr(  </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /bin/nvim /bin/vim</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.16.png" alt="1.1.16" title="1.1.16">  </p>
+<h4 id="同步时区"><a href="#同步时区" class="headerlink" title="同步时区"></a>同步时区</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">hwclock --systohc</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.17.png" alt="1.1.17" title="1.1.17">  </p>
+<h4 id="语言上的设置"><a href="#语言上的设置" class="headerlink" title="语言上的设置"></a>语言上的设置</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/locale.gen</span><br></pre></td></tr></table></figure>
+<p>这里取消掉<code>en_US.UTF-8</code> , <code>zh_CN.UTF-8</code> , <code>zh_TW.UTF-8</code> ，这几个地方的注释<br>也就是前面的<code>#</code>号  </p>
+<p>然后生成语言文件：  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">locale-gen</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.18.png" alt="1.1.18" title="1.1.18">  </p>
+<h4 id="追加-当前系统语言-到系统文件"><a href="#追加-当前系统语言-到系统文件" class="headerlink" title="追加 当前系统语言 到系统文件"></a>追加 <code>当前系统语言</code> 到系统文件</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> LANG=en_US.UTF-8 &gt;&gt; /etc/locale.conf</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.19.png" alt="1.1.19" title="1.1.19">  </p>
+<h4 id="设定root密码"><a href="#设定root密码" class="headerlink" title="设定root密码"></a>设定<code>root</code>密码</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.20.png" alt="1.1.20" title="1.1.20">  </p>
+<h4 id="主机名"><a href="#主机名" class="headerlink" title="主机名"></a>主机名</h4><blockquote>
+<p>设定成你自己喜欢的  </p>
+</blockquote>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.21.png" alt="1.1.21" title="1.1.21">  </p>
+<h4 id="本地回环"><a href="#本地回环" class="headerlink" title="本地回环"></a>本地回环</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<p>添加以下内容</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1 localhost</span><br><span class="line">::1 localhost</span><br><span class="line">127.0.1.1 livearch.localdomain livearch  <span class="comment">#跟着上一步改</span></span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.22.png" alt="1.1.22" title="1.1.22">  </p>
+<h4 id="安装引导"><a href="#安装引导" class="headerlink" title="安装引导"></a>安装引导</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pacman -S grub efibootmgr</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.23.png" alt="1.1.23" title="1.1.23">  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">grub-install /dev/sda</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.24.png" alt="1.1.24" title="1.1.24">  </p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.25.png" alt="1.1.25" title="1.1.25">  </p>
+<h4 id="hook微调"><a href="#hook微调" class="headerlink" title="hook微调"></a>hook微调</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/mkinitcpio.conf</span><br></pre></td></tr></table></figure>
+<p>将 <code>block</code> 和 <code>keyboard</code> 放置在 <code>autodetect</code> 之前<br><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.27.png" alt="1.1.27" title="1.1.27">  </p>
+<h4 id="退出，卸载，重启"><a href="#退出，卸载，重启" class="headerlink" title="退出，卸载，重启"></a>退出，卸载，重启</h4><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.26.png" alt="1.1.26" title="1.1.26">  </p>
+<h1 id="未完…"><a href="#未完…" class="headerlink" title="未完…."></a>未完….</h1><h2 id="在最后的最后，感恩。"><a href="#在最后的最后，感恩。" class="headerlink" title="在最后的最后，感恩。"></a><center>在最后的最后，感恩。</center></h2>   <p align="right">Romi Brooks♥</p>]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Archlinux</tag>
+        <tag>Installation</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello Hexo</title>
     <url>/2022/04/17/hello-world/</url>
     <content><![CDATA[<h2 id="Welcome-to-My-Bolg-I’m-Romi-Brooks"><a href="#Welcome-to-My-Bolg-I’m-Romi-Brooks" class="headerlink" title="Welcome to My Bolg! I’m Romi Brooks."></a>Welcome to <a href="https://blog.romichan.me/">My Bolg</a>! I’m <a href="https://home.romichan.me/">Romi Brooks</a>.</h2><audio id="audio" controls="" preload="none">
@@ -204,6 +210,19 @@
 <p>Blog owner: <a href="home.romichan.me">Romi Brooks</a><br>Ellis (Music Producer): <a href="http://music.163.com/artist?id=32932&userid=13691861">Ellis</a><br>Music: <a href="https://y.music.163.com/m/song?id=1383943958">Colours (Extended Mix)</a></p>
 </blockquote>
 ]]></content>
+  </entry>
+  <entry>
+    <title>变更记录</title>
+    <url>/2000/01/01/%E5%8F%98%E6%9B%B4%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="2022-10-6："><a href="#2022-10-6：" class="headerlink" title="2022-10-6："></a>2022-10-6：</h2><ul>
+<li>将Github Page上托管的Blog仓库迁移至主服务器<h2 id="2022-6-23："><a href="#2022-6-23：" class="headerlink" title="2022-6-23："></a>2022-6-23：</h2></li>
+<li>将Blog从旧域名迁移至新域名<h2 id="2022-6-17："><a href="#2022-6-17：" class="headerlink" title="2022-6-17："></a>2022-6-17：</h2></li>
+<li>上传Blog仓库到Github，并且托管至Github Page</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>SysRecord</tag>
+      </tags>
   </entry>
   <entry>
     <title>利用JACK , 玩转 Reaper For Linux</title>
@@ -285,19 +304,6 @@ Categories=Music;
       </categories>
       <tags>
         <tag>Reaper</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>变更记录</title>
-    <url>/2000/01/01/%E5%8F%98%E6%9B%B4%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="2022-10-6："><a href="#2022-10-6：" class="headerlink" title="2022-10-6："></a>2022-10-6：</h2><ul>
-<li>将Github Page上托管的Blog仓库迁移至主服务器<h2 id="2022-6-23："><a href="#2022-6-23：" class="headerlink" title="2022-6-23："></a>2022-6-23：</h2></li>
-<li>将Blog从旧域名迁移至新域名<h2 id="2022-6-17："><a href="#2022-6-17：" class="headerlink" title="2022-6-17："></a>2022-6-17：</h2></li>
-<li>上传Blog仓库到Github，并且托管至Github Page</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>SysRecord</tag>
       </tags>
   </entry>
 </search>

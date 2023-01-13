@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="blog romi music linux" />
+       
+      <meta name="description" content="Romi Brooks blog" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>FL Studio Tips: 通过控制LFO Speed，使你的音乐更有律动 |  Romi</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="Romi" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-FL-Studio-Tips-利用LFO-LFO-Speed做出加花效果"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  FL Studio Tips: 通过控制LFO Speed，使你的音乐更有律动
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/27/FL-Studio-Tips-%E5%88%A9%E7%94%A8LFO-LFO-Speed%E5%81%9A%E5%87%BA%E5%8A%A0%E8%8A%B1%E6%95%88%E6%9E%9C/" class="article-date">
+  <time datetime="2022-04-26T16:00:00.000Z" itemprop="datePublished">2022-04-27</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Music/">Music</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">708</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">2 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><img src="/../../../img/FL-Studio-Tips-LFO-Speed/cover.png" alt="封面" title="Cover"></p>
+<audio id="audio" controls="" preload="none">
+    <source id="mp3" src="../../../../music/FLTips/FutureBass.mp3">
+</audio>
+
+<p>在了解这之前，您可以点击上方的“播放按钮”，来听一首歌。</p>
+<p><em>（音乐来自：FL Studio中DemoSong内Asher Postman-Future Bass）</em></p>
+<p> 这首歌里用到了此文章所用到的技巧。</p>
+<span id="more"></span>
+<p><del>那么现在，我们开始⑧！</del></p>
+<h1 id="首先，您听到了吗？"><a href="#首先，您听到了吗？" class="headerlink" title="首先，您听到了吗？"></a>首先，您听到了吗？</h1><h2 id="在这个小节，我们可以明显的听到LFO频率交变所带来的特殊感觉"><a href="#在这个小节，我们可以明显的听到LFO频率交变所带来的特殊感觉" class="headerlink" title="在这个小节，我们可以明显的听到LFO频率交变所带来的特殊感觉:"></a>在这个小节，我们可以明显的听到LFO频率交变所带来的特殊感觉:</h2><audio id="audio" controls="" preload="none">
+    <source id="mp3" src="../../../../music/FLTips/FutureBassLFO2.mp3">
+</audio>
+
+<p> <del>什么？您没有听清？那我们去掉所有无关的sfx，和drums:</del></p>
+<audio id="audio" controls="" preload="none">
+    <source id="mp3" src="../../../../music/FLTips/FutureBassNDLFO2.mp3">
+</audio>
+
+<h2 id="其实还有一次，是在这里"><a href="#其实还有一次，是在这里" class="headerlink" title="其实还有一次，是在这里:"></a>其实还有一次，是在这里:</h2><audio id="audio" controls="" preload="none">
+    <source id="mp3" src="../../../../music/FLTips/FutureBassLFO1.mp3">
+</audio>
+
+<p><del>什么？您还是没有听清？那我们去掉所有无关的sfx，和drums:</del>  </p>
+<audio id="audio" controls="" preload="none">
+    <source id="mp3" src="../../../../music/FLTips/FutureBassNDLFO1.mp3">
+</audio>
+
+<h1 id="这下，您应该能大致的理解我想表达什么了。"><a href="#这下，您应该能大致的理解我想表达什么了。" class="headerlink" title="这下，您应该能大致的理解我想表达什么了。"></a>这下，您应该能大致的理解我想表达什么了。</h1><h2 id="这个效果可以用来干啥？"><a href="#这个效果可以用来干啥？" class="headerlink" title="这个效果可以用来干啥？"></a>这个效果可以用来干啥？</h2><p>  可以用来当做SFX的加花，可以用来结束一个乐句进行，也可以当做一种特殊的“震颤”效果，做出压抑感。与其他任何您喜欢的方式来对你的音乐美化。</p>
+<h2 id="你是怎么发现的？"><a href="#你是怎么发现的？" class="headerlink" title="你是怎么发现的？"></a>你是怎么发现的？</h2><p>  来自 Asher Postman-Future Bass，我的fb启蒙制作者，包括其中的一种SideChain方式也是从这个工程学的。</p>
+<blockquote>
+<p>Title: Future Bass (Stock Plugins Only) </br><br>Author: <a target="_blank" rel="noopener" href="https://soundcloud.com/asher-postman">Asher Postman</a></br><br>Copyright © 2018 Asher Postman. </br></p>
+</blockquote>
+<h2 id="如何实现？"><a href="#如何实现？" class="headerlink" title="如何实现？"></a>如何实现？</h2><p>  来看两张图：</br><br><img src="/../../../img/FL-Studio-Tips-LFO-Speed/1.gif" alt="1" title="1"></br><br><img src="/../../../img/FL-Studio-Tips-LFO-Speed/2.gif" alt="2" title="2"></br></p>
+<p>  不知道你有没有看到他们的共性，没错：<strong>其中的一个AMC（Automation Clips）均为”LFO Speed”，伴随着LFO Speed的降低，它们所控制的LFO频率也随之降低。</strong></p>
+<p>  上面说，“他们所控制的LFO频率”，那么我们首先得创作出一个LFO的AMC，这里FL Studio给大家了一种方法：</p>
+<pre><code>  1.在您要实施此效果的对应旋钮上新建一个 AMC (Create automation clip)
+  2.在 View Playlist 找到它，单击它名字旁边的AMC图标
+  3.点击Channel Settings
+    （1.一个很明显的 LFO 选项，打开它，之后设计您想要的波形（我们先不管speed，您可以设定其他几个值）
+    （2.右键SPEED旋钮，新建一个AMC
+    （3.现在您得到了两个AMC，这正是我们想要的结果，接下来就要靠您的听感了
+  4.在您听感的基础上，调节LFO speed AMC使其满足您的要求
+  5.Good Job，您已经做好了一件看起来很困难的东西，但其实这并不难，不是吗？
+</code></pre>
+<h1 id="原理？"><a href="#原理？" class="headerlink" title="原理？"></a>原理？</h1><p>  原理就是，LFO Speed AMC 控制LFO的频率，影响到LFO所控制的旋钮  </p>
+<h1 id="实践-amp-展示"><a href="#实践-amp-展示" class="headerlink" title="实践&amp;展示"></a>实践&amp;展示</h1><h2 id="一，做FutureBass的WobbleChords（无LFO-Speed-AMC，当然您也可以加）："><a href="#一，做FutureBass的WobbleChords（无LFO-Speed-AMC，当然您也可以加）：" class="headerlink" title="一，做FutureBass的WobbleChords（无LFO Speed AMC，当然您也可以加）："></a>一，做FutureBass的WobbleChords（无LFO Speed AMC，当然您也可以加）：</h2><p><img src="/../../../img/FL-Studio-Tips-LFO-Speed/1.png" alt="1" title="1"></br></p>
+<h2 id="二，做Hippop的MelodySFX："><a href="#二，做Hippop的MelodySFX：" class="headerlink" title="二，做Hippop的MelodySFX："></a>二，做Hippop的MelodySFX：</h2><p><img src="/../../../img/FL-Studio-Tips-LFO-Speed/2.png" alt="2" title="2"></br> </p>
+<blockquote>
+<p>Tips：在这里，您可以用Wave，Pulse等AMC Point Mode，右键AMC节点即可。<br></br>  </p>
+</blockquote>
+<h2 id="三，And-so-on……"><a href="#三，And-so-on……" class="headerlink" title="三，And so on……"></a>三，And so on……</h2></br>
+
+
+<h1 id="最后，一首Melodic-Dubstep给您，感谢您阅读此文章，这便是对我最大的认可了。"><a href="#最后，一首Melodic-Dubstep给您，感谢您阅读此文章，这便是对我最大的认可了。" class="headerlink" title="最后，一首Melodic Dubstep给您，感谢您阅读此文章，这便是对我最大的认可了。"></a>最后，一首Melodic Dubstep给您，感谢您阅读此文章，这便是对我最大的认可了。</h1><blockquote>
+<p>这里用到了<a target="_blank" rel="noopener" href="https://www.youtube.com/user/OfficialVirtualRiot">Virtual Riot</a>  的采样包，堆叠而成。我只是做了混音以及编排（哦对，还有一个自己的Long BuildUp，笑）。 </br></p>
+</blockquote>
+<p><img src="/../../../img/FL-Studio-Tips-LFO-Speed/3.png" alt="3" title="3"></br></p>
+<audio id="audio" controls="" preload="none">
+    <source id="mp3" src="../../../../music/FLTips/Md.mp3">
+</audio>
+
+</br>
+
+<h2 id="在最后的最后，感恩。"><a href="#在最后的最后，感恩。" class="headerlink" title="在最后的最后，感恩。"></a><center>在最后的最后，感恩。</center></h2>   <p align="right">Romi Brooks♥</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://blog.romichan.me/2022/04/27/FL-Studio-Tips-%E5%88%A9%E7%94%A8LFO-LFO-Speed%E5%81%9A%E5%87%BA%E5%8A%A0%E8%8A%B1%E6%95%88%E6%9E%9C/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FL-Tips/" rel="tag">FL-Tips</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/10/28/%E5%88%A9%E7%94%A8JACK%20,%20%E7%8E%A9%E8%BD%AC%20Reaper%20For%20Linux/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            利用JACK , 玩转 Reaper For Linux
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/04/17/hello-world/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Hello Hexo</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "E3Le9vxopO9hFy1XDqS2lgLl-gzGzoHsz",
+    app_key: "5LGLOs5GpcbHfzVajrF6FQfl",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "评论",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2023
+        <i class="ri-heart-fill heart_icon"></i> Romi Brooks
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Romi"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+ 
+<script src="/js/clickLove.js"></script>
+ 
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":false},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
