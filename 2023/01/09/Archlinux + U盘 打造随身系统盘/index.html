@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.1k</span>
+            <span class="post-count">1.9k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">4 min</span>
+            <span class="post-count">7 min</span>
         </span>
     </span>
 </div>
@@ -114,12 +114,16 @@
     <div class="article-entry" itemprop="articleBody">
        
   <p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/Cover.jpg" alt="封面" title="Cover"></p>
-<h1 id="最后一次编辑时间：2023-01-10-0-51"><a href="#最后一次编辑时间：2023-01-10-0-51" class="headerlink" title="最后一次编辑时间：2023-01-10 0:51"></a>最后一次编辑时间：2023-01-10 0:51</h1><center>
+<h1 id="最后一次编辑时间：2023-01-15-16-53"><a href="#最后一次编辑时间：2023-01-15-16-53" class="headerlink" title="最后一次编辑时间：2023-01-15 16:53"></a>最后一次编辑时间：2023-01-15 16:53</h1><ul>
+<li>上一次编辑时间：2023-01-10 0:51</li>
+</ul>
+<center>
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1393318072&auto=0&height=66"></iframe>
 
 
 <p><em>Music：<a target="_blank" rel="noopener" href="https://music.163.com/#/song?id=1393318072&userid=1369186144">Fractal</a> by <a target="_blank" rel="noopener" href="https://music.163.com/#/artist?id=742233">Tinlicker</a></em>  </p>
-</center>   
+</center>  
+
 
 <blockquote>
 <p>参考文献<br>1.一个完整的Arch Linux 安装流程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/513859236">2022.5 archlinux详细安装过程</a><br>2.在可移动介质上安装Arch Linux：<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Install_Arch_Linux_on_a_removable_medium">Install Arch Linux on a removable medium</a><br>3.i3wm配置：<a target="_blank" rel="noopener" href="https://blog.csdn.net/r8l8q8/article/details/103889972">ArchLinux下i3wm简单配置和美化</a><br>4.i3wm配置：<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022083424">一份自用的简单i3wm配置</a>  </p>
@@ -129,7 +133,8 @@
 <p><del>Start</del></p>
 <h1 id="安装Arch-Linux"><a href="#安装Arch-Linux" class="headerlink" title="安装Arch Linux"></a>安装Arch Linux</h1><h2 id="引导，分区，调整，安装："><a href="#引导，分区，调整，安装：" class="headerlink" title="引导，分区，调整，安装："></a>引导，分区，调整，安装：</h2><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.1.png" alt="1.1.1" title="1.1.1">  </p>
 <h3 id="确保使用UEFI引导："><a href="#确保使用UEFI引导：" class="headerlink" title="确保使用UEFI引导："></a>确保使用UEFI引导：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> /sys/firmware/efi/efivars</span><br></pre></td></tr></table></figure>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.2.png" alt="1.1.2" title="1.1.2"><br>输入这一行代码后，如果反馈目录不存在，不要继续，因为没有UEFI启动在后面写入引导的时候几乎绝对报错。如果有输出，说明电脑是以UEFI启动的。  </p>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.2.png" alt="1.1.2" title="1.1.2">  </p>
+<p>输入这一行代码后，如果反馈目录不存在，不要继续，因为没有UEFI启动在后面写入引导的时候几乎绝对报错。如果有输出，说明电脑是以UEFI启动的。  </p>
 <blockquote>
 <p>Tips: 写入image用<code>Rufus</code>，这就是使用U盘安装。如果是没有多出来的U盘，则可以用虚拟机环境。</p>
 </blockquote>
@@ -159,23 +164,25 @@
 <p>确保分区挂载正确，这里的参考应该是上文你所创建的分区！</p>
 </blockquote>
 <h4 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h4><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.8.png" alt="1.1.8" title="1.1.8">  </p>
-<h3 id="配置pacman"><a href="#配置pacman" class="headerlink" title="配置pacman:"></a>配置pacman:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pacman.d/mirrors</span><br></pre></td></tr></table></figure>
+<h3 id="配置pacman"><a href="#配置pacman" class="headerlink" title="配置pacman"></a>配置pacman</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pacman.d/mirrors</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>无论这个页面的内容是什么，只需要无脑修改第一条为<br>Server &#x3D; <a target="_blank" rel="noopener" href="https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch">https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch</a>  </p>
+<p>无论这个页面的内容是什么，只需要无脑修改第一条为  </p>
 </blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Server = https://mirrors.bfsu.edu.cn/archlinux/<span class="variable">$repo</span>/os/<span class="variable">$arch</span>  </span><br></pre></td></tr></table></figure>
+
 <p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.9.png" alt="1.1.9" title="1.1.9">  </p>
 <h4 id="先同步数据包，不升级"><a href="#先同步数据包，不升级" class="headerlink" title="先同步数据包，不升级"></a>先同步数据包，不升级</h4><blockquote>
 <p>注意，不升级！  </p>
 </blockquote>
 <p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.10.png" alt="1.1.10" title="1.1.10">  </p>
 <h4 id="安装archlinux-keyring防止签名出现问题"><a href="#安装archlinux-keyring防止签名出现问题" class="headerlink" title="安装archlinux-keyring防止签名出现问题"></a>安装<code>archlinux-keyring</code>防止签名出现问题</h4><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.11.png" alt="1.1.11" title="1.1.11">  </p>
-<h3 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统:"></a>安装系统:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacstrap /mnt base linux-lts linux-lts-headers linux-firmware base-devel</span><br></pre></td></tr></table></figure>
+<h3 id="安装系统到U盘"><a href="#安装系统到U盘" class="headerlink" title="安装系统到U盘"></a>安装系统到U盘</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacstrap /mnt base linux-lts linux-lts-headers linux-firmware base-devel</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>我安装的是lts内核，如果不需要lts内核，那就去掉<code>-lts</code>即可。  </p>
 </blockquote>
 <p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.12.png" alt="1.1.12" title="1.1.12"> </p>
 <blockquote>
-<p>btw，这里如果u盘IO不怎么地，那可能会巨慢….</p>
+<p><del>btw，这里如果U盘IO不怎么地，那可能会巨慢….</del></p>
 </blockquote>
 <h4 id="写分区表"><a href="#写分区表" class="headerlink" title="写分区表"></a>写分区表</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br><span class="line"><span class="built_in">cat</span> /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -198,7 +205,6 @@
 <p>这里取消掉<code>en_US.UTF-8</code> , <code>zh_CN.UTF-8</code> , <code>zh_TW.UTF-8</code> ，这几个地方的注释<br>也就是前面的<code>#</code>号  </p>
 <p>然后生成语言文件：  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locale-gen</span><br></pre></td></tr></table></figure>
-
 <p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.18.png" alt="1.1.18" title="1.1.18">  </p>
 <h4 id="追加-当前系统语言-到系统文件"><a href="#追加-当前系统语言-到系统文件" class="headerlink" title="追加 当前系统语言 到系统文件"></a>追加 <code>当前系统语言</code> 到系统文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> LANG=en_US.UTF-8 &gt;&gt; /etc/locale.conf</span><br></pre></td></tr></table></figure>
 
@@ -208,9 +214,9 @@
 <h4 id="主机名"><a href="#主机名" class="headerlink" title="主机名"></a>主机名</h4><blockquote>
 <p>设定成你自己喜欢的  </p>
 </blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> livearch &gt;&gt; /etc/hostname</span><br></pre></td></tr></table></figure>
 <p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.21.png" alt="1.1.21" title="1.1.21">  </p>
 <h4 id="本地回环"><a href="#本地回环" class="headerlink" title="本地回环"></a>本地回环</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
-
 <p>添加以下内容</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1 localhost</span><br><span class="line">::1 localhost</span><br><span class="line">127.0.1.1 livearch.localdomain livearch  <span class="comment">#跟着上一步改</span></span><br></pre></td></tr></table></figure>
 <p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.22.png" alt="1.1.22" title="1.1.22">  </p>
@@ -220,10 +226,87 @@
 <p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.24.png" alt="1.1.24" title="1.1.24">  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
 <p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.25.png" alt="1.1.25" title="1.1.25">  </p>
-<h4 id="hook微调"><a href="#hook微调" class="headerlink" title="hook微调"></a>hook微调</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/mkinitcpio.conf</span><br></pre></td></tr></table></figure>
-<p>将 <code>block</code> 和 <code>keyboard</code> 放置在 <code>autodetect</code> 之前<br><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.27.png" alt="1.1.27" title="1.1.27">  </p>
-<h4 id="退出，卸载，重启"><a href="#退出，卸载，重启" class="headerlink" title="退出，卸载，重启"></a>退出，卸载，重启</h4><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.26.png" alt="1.1.26" title="1.1.26">  </p>
-<h1 id="未完…"><a href="#未完…" class="headerlink" title="未完…."></a>未完….</h1><h2 id="在最后的最后，感恩。"><a href="#在最后的最后，感恩。" class="headerlink" title="在最后的最后，感恩。"></a><center>在最后的最后，感恩。</center></h2>   <p align="right">Romi Brooks♥</p> 
+<h4 id="hook微调"><a href="#hook微调" class="headerlink" title="hook微调"></a>hook微调</h4><p>将 <code>block</code> 和 <code>keyboard</code> 放置在 <code>autodetect</code> 之前<br><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.27.png" alt="1.1.27" title="1.1.27">  </p>
+<h4 id="退出，卸载，重启"><a href="#退出，卸载，重启" class="headerlink" title="退出，卸载，重启"></a>退出，卸载，重启</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br><span class="line">umount -R /mnt</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<p>到这一步差不多就完成了系统的安装，下面就要开始配置系统了。<br><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.26.png" alt="1.1.26" title="1.1.26">  </p>
+<p><del>Last Edit Time: 2023-01-10 0:51</del></p>
+<h1 id="配置Arch-Linux"><a href="#配置Arch-Linux" class="headerlink" title="配置Arch Linux"></a>配置Arch Linux</h1><h2 id="网络基础服务："><a href="#网络基础服务：" class="headerlink" title="网络基础服务："></a>网络基础服务：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">systemctl start iwd.service</span><br><span class="line">systemctl <span class="built_in">enable</span> iwd.service</span><br><span class="line">systemctl start systemd-resolved.service</span><br><span class="line">systemctl <span class="built_in">enable</span> systemd-resolved.service</span><br><span class="line">systemctl <span class="built_in">enable</span> bluetooth.service</span><br><span class="line">systemctl <span class="built_in">enable</span> NetworkManager</span><br><span class="line">systemctl <span class="built_in">enable</span> dhcpcd</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.1.1.png" alt="2.1.1" title="2.1.1">  </p>
+<h3 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h3><p><code>iwd 设定</code>  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/iwd/main.conf</span><br></pre></td></tr></table></figure>
+
+<p>写入如下内容  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[General]</span><br><span class="line">EnableNetworkConfiguration=<span class="literal">true</span></span><br><span class="line">NameResolvingService=systemd</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.1.2.png" alt="2.1.2" title="2.1.2">  </p>
+<p><code>Network Manager设定</code>  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/NetworkManager/NetworkManager.conf</span><br></pre></td></tr></table></figure>
+<p>写入如下内容  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[device]</span><br><span class="line">wifi.backend=iwd</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.1.3.png" alt="2.1.3" title="2.1.3">  </p>
+<h3 id="重启以取得网络"><a href="#重启以取得网络" class="headerlink" title="重启以取得网络"></a>重启以取得网络</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<h4 id="检查是否连接到网路"><a href="#检查是否连接到网路" class="headerlink" title="检查是否连接到网路"></a>检查是否连接到网路</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Syu</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.1.4.png" alt="2.1.4" title="2.1.4">  </p>
+<p>这个命令只是为了检查有没有得到网络，如果报错，那就说明网络配置有问题，仔细检查一下。<br>如果没有问题，可以选择升级，也可以选择不升级，完全看自己。  </p>
+<h2 id="安装CPU编码"><a href="#安装CPU编码" class="headerlink" title="安装CPU编码"></a>安装CPU编码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S intel-ucode amd-ucode</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.1.5.png" alt="2.1.5" title="2.1.5">  </p>
+<blockquote>
+<p>一起装Intel和AMD的CPU编码，以确保Archlinux可以在不同下CPU成功的启动。  </p>
+</blockquote>
+<h2 id="安装显卡驱动"><a href="#安装显卡驱动" class="headerlink" title="安装显卡驱动"></a>安装显卡驱动</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S xf86-video-intel xf86-video-amdgpu mesa</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.1.6.png" alt="2.1.6" title="2.1.6">  </p>
+<blockquote>
+<p>这里不涉及nVidia显卡的驱动安装过程<br><code>xf86-video-intel</code>  Intel核芯显卡<br><code>xf86-video-amdgpu</code> AMD显卡<br><code>mesa</code> 是为了更好的兼容这两者(?)  </p>
+</blockquote>
+<h2 id="安装声卡驱动"><a href="#安装声卡驱动" class="headerlink" title="安装声卡驱动"></a>安装声卡驱动</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S pipewire alsa-utils pipewire-pulse pipewire-jack pipewire-alsa</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.1.7.png" alt="2.1.7" title="2.1.7">  </p>
+<h2 id="增加普通用户"><a href="#增加普通用户" class="headerlink" title="增加普通用户"></a>增加普通用户</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -G wheel -s /bin/bash romi</span><br><span class="line">passwd romi</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.1.8.png" alt="2.1.8" title="2.1.8">  </p>
+<p>用 <code>passwd romi</code> 设定用户密码，输入一个你想要的密码就可以。  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sudoers</span><br></pre></td></tr></table></figure>
+<p>修改sudoer以此让<code>romi</code>有使用sudo的权限。<br>取消 <code>%wheel ALL=(ALL:ALL) ALL</code> 这条语句的注释，也就是删去语句前的 <code>#</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Uncomment to allow members of group wheel to execute any command</span></span><br><span class="line"><span class="comment"># %wheel ALL=(ALL:ALL) ALL</span></span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.1.9.png" alt="2.1.9" title="2.1.9">  </p>
+<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><p>到这里，基本上所有系统的配置就完成了。下一次登陆系统就是一个完全可以用的Arch Linux系统了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<h1 id="桌面配置"><a href="#桌面配置" class="headerlink" title="桌面配置"></a>桌面配置</h1><blockquote>
+<p>为了方便，以下使用 <code>root</code> 用户完成</p>
+</blockquote>
+<p>如果你的U盘容量小，那就选择<code>i3wm</code><br>亲测<code>/</code>分区为10G时,安装<code>KDE</code>或者是<code>Gnome</code>会Kernel Panic<br>并且为了简约，我选择<code>i3wm</code></p>
+<h2 id="首先安装桌面服务"><a href="#首先安装桌面服务" class="headerlink" title="首先安装桌面服务"></a>首先安装桌面服务</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S xorg</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.2.1.png" alt="2.2.1" title="2.2.1">  </p>
+<h2 id="如果是安装KDE"><a href="#如果是安装KDE" class="headerlink" title="如果是安装KDE"></a>如果是安装<code>KDE</code></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S plasma sddm konsole dolphin kate ark</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>安装好后设定<code>sddm</code>的自启动</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> sddm</span><br></pre></td></tr></table></figure>
+<h2 id="如果是安装Gnome"><a href="#如果是安装Gnome" class="headerlink" title="如果是安装Gnome"></a>如果是安装<code>Gnome</code></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S gnome</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>安装好后设定<code>gdm</code>的自启动</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> gdm</span><br></pre></td></tr></table></figure>
+<h2 id="如果是安装i3wm"><a href="#如果是安装i3wm" class="headerlink" title="如果是安装i3wm"></a>如果是安装<code>i3wm</code></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S xorg-xinit xorg-server i3-gaps</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.2.2.png" alt="2.2.2" title="2.2.2">  </p>
+<h3 id="配置i3wm"><a href="#配置i3wm" class="headerlink" title="配置i3wm"></a>配置<code>i3wm</code></h3><p>使用<code>Ctrl+Alt+F2</code>跳转到一个新的tty，登录普通用户，就是前面你新创建的用户，我这里是<code>romi</code>  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.xinitrc</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.2.3.png" alt="2.2.3" title="2.2.3">  </p>
+<p>写入以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> LANG=zh_CN.UTF-8</span><br><span class="line">xrdb -merge ~/.Xresources</span><br><span class="line"><span class="built_in">exec</span> i3</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.2.4.png" alt="2.2.4" title="2.2.4">  </p>
+<p>然后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.Xresources</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.2.6.png" alt="2.2.6" title="2.2.6">  </p>
+<p>写入以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Xft.dpi: 96</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.2.5.png" alt="2.2.5" title="2.2.5">  </p>
+<blockquote>
+<p>原文作者有给出dpi参考值：  </p>
+<blockquote>
+<p>里面的数字填 ( 放大倍数 ) * 96 就可以了，比如192就是放到200%，给个简单参考<br>15.5寸笔记本，1920x1080,填144<br>15.5寸笔记本，2560x1440,填192<br>如果觉得太大了，可以调小, 建议为25%的倍数  </p>
+</blockquote>
+</blockquote>
+<h1 id="i3wm后续配置"><a href="#i3wm后续配置" class="headerlink" title="i3wm后续配置"></a>i3wm后续配置</h1><h1 id="未完…"><a href="#未完…" class="headerlink" title="未完…"></a>未完…</h1><p><del>Last Edit Time: 2023-01-15 17:52</del></p>
+<h2 id="在最后的最后，感恩。"><a href="#在最后的最后，感恩。" class="headerlink" title="在最后的最后，感恩。"></a><center>在最后的最后，感恩。</center></h2>   <p align="right">Romi Brooks♥</p> 
       <!-- reward -->
       
     </div>
@@ -292,7 +375,7 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Archlinux/" rel="tag">Archlinux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Installation/" rel="tag">Installation</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Archlinux/" rel="tag">Archlinux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Installation/" rel="tag">Installation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/i3wm/" rel="tag">i3wm</a></li></ul>
 
     </footer>
   </div>

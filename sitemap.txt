@@ -6,11 +6,12 @@ https://blog.romichan.me/2022/04/27/FL-Studio-Tips-%E5%88%A9%E7%94%A8LFO-LFO-Spe
 https://blog.romichan.me/2022/04/17/hello-world/
 https://blog.romichan.me/2022/10/28/%E5%88%A9%E7%94%A8JACK%20,%20%E7%8E%A9%E8%BD%AC%20Reaper%20For%20Linux/
 https://blog.romichan.me/
-https://blog.romichan.me/tags/FL-Tips/
 https://blog.romichan.me/tags/Archlinux/
 https://blog.romichan.me/tags/Installation/
-https://blog.romichan.me/tags/SysRecord/
+https://blog.romichan.me/tags/i3wm/
+https://blog.romichan.me/tags/FL-Tips/
 https://blog.romichan.me/tags/Reaper/
-https://blog.romichan.me/categories/Music/
+https://blog.romichan.me/tags/SysRecord/
 https://blog.romichan.me/categories/Linux/
+https://blog.romichan.me/categories/Music/
 https://blog.romichan.me/categories/Music/Linux/

@@ -6,7 +6,7 @@
   <link href="https://blog.romichan.me/atom.xml" rel="self"/>
   
   <link href="https://blog.romichan.me/"/>
-  <updated>2023-01-13T17:59:21.738Z</updated>
+  <updated>2023-01-15T18:26:27.491Z</updated>
   <id>https://blog.romichan.me/</id>
   
   <author>
@@ -21,16 +21,20 @@
     <link href="https://blog.romichan.me/2023/01/09/Archlinux%20+%20U%E7%9B%98%20%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/"/>
     <id>https://blog.romichan.me/2023/01/09/Archlinux%20+%20U%E7%9B%98%20%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/</id>
     <published>2023-01-08T16:00:00.000Z</published>
-    <updated>2023-01-13T17:59:21.738Z</updated>
+    <updated>2023-01-15T18:26:27.491Z</updated>
     
     
     <summary type="html">&lt;p&gt;&lt;img src=&quot;/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/Cover.jpg&quot; alt=&quot;封面&quot; title=&quot;Cover&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;最后一次编辑时间：2023-01-10-0-51&quot;&gt;&lt;a href=&quot;#最后一次编辑时间：2023-01-10-0-51&quot; class=&quot;headerlink&quot; title=&quot;最后一次编辑时间：2023-01-10 0:51&quot;&gt;&lt;/a&gt;最后一次编辑时间：2023-01-10 0:51&lt;/h1&gt;&lt;center&gt;
+&lt;h1 id=&quot;最后一次编辑时间：2023-01-15-16-53&quot;&gt;&lt;a href=&quot;#最后一次编辑时间：2023-01-15-16-53&quot; class=&quot;headerlink&quot; title=&quot;最后一次编辑时间：2023-01-15 16:53&quot;&gt;&lt;/a&gt;最后一次编辑时间：2023-01-15 16:53&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;上一次编辑时间：2023-01-10 0:51&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;
 &lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=1393318072&amp;auto=0&amp;height=66&quot;&gt;&lt;/iframe&gt;
 
 
 &lt;p&gt;&lt;em&gt;Music：&lt;a href=&quot;https://music.163.com/#/song?id=1393318072&amp;userid=1369186144&quot;&gt;Fractal&lt;/a&gt; by &lt;a href=&quot;https://music.163.com/#/artist?id=742233&quot;&gt;Tinlicker&lt;/a&gt;&lt;/em&gt;  &lt;/p&gt;
-&lt;/center&gt;   
+&lt;/center&gt;  
+
 
 &lt;blockquote&gt;
 &lt;p&gt;参考文献&lt;br&gt;1.一个完整的Arch Linux 安装流程：&lt;a href=&quot;https://zhuanlan.zhihu.com/p/513859236&quot;&gt;2022.5 archlinux详细安装过程&lt;/a&gt;&lt;br&gt;2.在可移动介质上安装Arch Linux：&lt;a href=&quot;https://wiki.archlinux.org/title/Install_Arch_Linux_on_a_removable_medium&quot;&gt;Install Arch Linux on a removable medium&lt;/a&gt;&lt;br&gt;3.i3wm配置：&lt;a href=&quot;https://blog.csdn.net/r8l8q8/article/details/103889972&quot;&gt;ArchLinux下i3wm简单配置和美化&lt;/a&gt;&lt;br&gt;4.i3wm配置：&lt;a href=&quot;https://segmentfault.com/a/1190000022083424&quot;&gt;一份自用的简单i3wm配置&lt;/a&gt;  &lt;/p&gt;
@@ -45,6 +49,8 @@
     <category term="Archlinux" scheme="https://blog.romichan.me/tags/Archlinux/"/>
     
     <category term="Installation" scheme="https://blog.romichan.me/tags/Installation/"/>
+    
+    <category term="i3wm" scheme="https://blog.romichan.me/tags/i3wm/"/>
     
   </entry>
   
