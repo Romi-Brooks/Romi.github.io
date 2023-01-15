@@ -174,8 +174,10 @@
 <h4 id="先同步数据包，不升级"><a href="#先同步数据包，不升级" class="headerlink" title="先同步数据包，不升级"></a>先同步数据包，不升级</h4><blockquote>
 <p>注意，不升级！  </p>
 </blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Syu</span><br></pre></td></tr></table></figure>
 <p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.10.png" alt="1.1.10" title="1.1.10">  </p>
-<h4 id="安装archlinux-keyring防止签名出现问题"><a href="#安装archlinux-keyring防止签名出现问题" class="headerlink" title="安装archlinux-keyring防止签名出现问题"></a>安装<code>archlinux-keyring</code>防止签名出现问题</h4><p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.11.png" alt="1.1.11" title="1.1.11">  </p>
+<h4 id="安装archlinux-keyring防止签名出现问题"><a href="#安装archlinux-keyring防止签名出现问题" class="headerlink" title="安装archlinux-keyring防止签名出现问题"></a>安装<code>archlinux-keyring</code>防止签名出现问题</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S archlinux-keyring</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.11.png" alt="1.1.11" title="1.1.11">  </p>
 <h3 id="安装系统到U盘"><a href="#安装系统到U盘" class="headerlink" title="安装系统到U盘"></a>安装系统到U盘</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacstrap /mnt base linux-lts linux-lts-headers linux-firmware base-devel</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>我安装的是lts内核，如果不需要lts内核，那就去掉<code>-lts</code>即可。  </p>
