@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.9k</span>
+            <span class="post-count">2.8k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">7 min</span>
+            <span class="post-count">11 min</span>
         </span>
     </span>
 </div>
@@ -114,7 +114,8 @@
     <div class="article-entry" itemprop="articleBody">
        
   <p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/Cover.jpg" alt="封面" title="Cover"></p>
-<h1 id="最后一次编辑时间：2023-01-15-16-53"><a href="#最后一次编辑时间：2023-01-15-16-53" class="headerlink" title="最后一次编辑时间：2023-01-15 16:53"></a>最后一次编辑时间：2023-01-15 16:53</h1><ul>
+<h1 id="最后一次编辑时间-2023-01-17-17-53"><a href="#最后一次编辑时间-2023-01-17-17-53" class="headerlink" title="最后一次编辑时间: 2023-01-17 17:53"></a>最后一次编辑时间: 2023-01-17 17:53</h1><ul>
+<li>上一次编辑时间：2023-01-15 16:53</li>
 <li>上一次编辑时间：2023-01-10 0:51</li>
 </ul>
 <center>
@@ -228,7 +229,9 @@
 <p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.24.png" alt="1.1.24" title="1.1.24">  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
 <p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.25.png" alt="1.1.25" title="1.1.25">  </p>
-<h4 id="hook微调"><a href="#hook微调" class="headerlink" title="hook微调"></a>hook微调</h4><p>将 <code>block</code> 和 <code>keyboard</code> 放置在 <code>autodetect</code> 之前<br><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.27.png" alt="1.1.27" title="1.1.27">  </p>
+<h4 id="hook微调"><a href="#hook微调" class="headerlink" title="hook微调"></a>hook微调</h4><p>将 <code>block</code> 和 <code>keyboard</code> 放置在 <code>autodetect</code> 之前</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/mkinitcpio.conf</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.27.png" alt="1.1.27" title="1.1.27">  </p>
 <h4 id="退出，卸载，重启"><a href="#退出，卸载，重启" class="headerlink" title="退出，卸载，重启"></a>退出，卸载，重启</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br><span class="line">umount -R /mnt</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
 <p>到这一步差不多就完成了系统的安装，下面就要开始配置系统了。<br><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/1.1.26.png" alt="1.1.26" title="1.1.26">  </p>
 <p><del>Last Edit Time: 2023-01-10 0:51</del></p>
@@ -267,7 +270,16 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sudoers</span><br></pre></td></tr></table></figure>
 <p>修改sudoer以此让<code>romi</code>有使用sudo的权限。<br>取消 <code>%wheel ALL=(ALL:ALL) ALL</code> 这条语句的注释，也就是删去语句前的 <code>#</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Uncomment to allow members of group wheel to execute any command</span></span><br><span class="line"><span class="comment"># %wheel ALL=(ALL:ALL) ALL</span></span><br></pre></td></tr></table></figure>
-<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.1.9.png" alt="2.1.9" title="2.1.9">  </p>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/2.1.9.png" alt="2.1.9" title="2.1.9"> </p>
+<h2 id="配置archlinuxcn源"><a href="#配置archlinuxcn源" class="headerlink" title="配置archlinuxcn源"></a>配置archlinuxcn源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pacman.conf</span><br></pre></td></tr></table></figure>
+<p>在最后插入以下内容:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[archlinuxcn]</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/<span class="variable">$arch</span></span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/fix_2.1.10.png" alt="2.1.10" title="2.1.10">  </p>
+<p>然后安装 <code>archlinuxcn-keyring</code> 防止签名出现问题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pacman -Sy</span><br><span class="line">pacman -S archlinuxcn-keyring</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/fix_2.1.11.png" alt="2.1.11" title="2.1.11">  </p>
+<h2 id="安装yay"><a href="#安装yay" class="headerlink" title="安装yay"></a>安装yay</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S yay</span><br></pre></td></tr></table></figure>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/fix_2.1.12.png" alt="2.1.12" title="2.1.12">  </p>
 <h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><p>到这里，基本上所有系统的配置就完成了。下一次登陆系统就是一个完全可以用的Arch Linux系统了。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
 
@@ -307,8 +319,100 @@
 <p>里面的数字填 ( 放大倍数 ) * 96 就可以了，比如192就是放到200%，给个简单参考<br>15.5寸笔记本，1920x1080,填144<br>15.5寸笔记本，2560x1440,填192<br>如果觉得太大了，可以调小, 建议为25%的倍数  </p>
 </blockquote>
 </blockquote>
-<h1 id="i3wm后续配置"><a href="#i3wm后续配置" class="headerlink" title="i3wm后续配置"></a>i3wm后续配置</h1><h1 id="未完…"><a href="#未完…" class="headerlink" title="未完…"></a>未完…</h1><p><del>Last Edit Time: 2023-01-15 17:52</del></p>
-<h2 id="在最后的最后，感恩。"><a href="#在最后的最后，感恩。" class="headerlink" title="在最后的最后，感恩。"></a><center>在最后的最后，感恩。</center></h2>   <p align="right">Romi Brooks♥</p> 
+<h3 id="重启系统"><a href="#重启系统" class="headerlink" title="重启系统"></a>重启系统</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<p><del>Last Edit Time: 2023-01-15 17:52</del></p>
+<h1 id="i3wm后续配置"><a href="#i3wm后续配置" class="headerlink" title="i3wm后续配置"></a>i3wm后续配置</h1><h2 id="进入i3wm"><a href="#进入i3wm" class="headerlink" title="进入i3wm"></a>进入i3wm</h2><p>登录普通用户,进入i3wm  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startx</span><br></pre></td></tr></table></figure>
+<h3 id="i3配置文件"><a href="#i3配置文件" class="headerlink" title="i3配置文件"></a>i3配置文件</h3><p>回车,生成i3配置文件  </p>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/3.1.1.png" alt="3.1.1" title="3.1.1">  </p>
+<h3 id="mod键位"><a href="#mod键位" class="headerlink" title="mod键位"></a>mod键位</h3><p>注意,这里把<code>mod</code>键设置为<code>Win</code>  </p>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/3.1.2.png" alt="3.1.2" title="3.1.2">  </p>
+<h3 id="安装必要软件-1"><a href="#安装必要软件-1" class="headerlink" title="安装必要软件"></a>安装必要软件</h3><p>使用<code>Ctrl+Alt+F2</code>跳转到一个新的tty，登录普通用户，就是前面你新创建的用户，我这里是<code>romi</code>  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S compton polybar rofi feh mate-utils konsole</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>第一次使用sudo会提示用户输入密码,正常输入即可  </p>
+</blockquote>
+<p><img src="/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/3.1.3.png" alt="3.1.3" title="3.1.3">  </p>
+<h3 id="克隆配置文件到本地"><a href="#克隆配置文件到本地" class="headerlink" title="克隆配置文件到本地"></a><del>克隆配置文件到本地</del></h3><p>(如果区域内github被墙,那么就看跳过这一部分)  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/Romi-Brooks/i3wm_conf.git</span><br></pre></td></tr></table></figure>
+<p>这些文件的用处:  </p>
+<blockquote>
+<p><code>config</code> i3wm配置文件<br><code>config.ini</code> polybar配置文件<br><code>launch.sh</code> 用于加载 polybar<br><code>3177970.jpg</code> 背景图片</p>
+</blockquote>
+<p>他们分别应该存放到:</p>
+<blockquote>
+<p><code>3177970.jpg</code> -&gt; <code>~/Pictures/Background.jpg</code><br>这里的 <code>~/Pictures/</code>文件夹需要自行创建,背景文件你可以选一个你喜欢的,不一定要用我这个  </p>
+<blockquote>
+<p>这里你需要自己改一下文件名:<br>(很简单,只要最终文件目录是 <code>~/Pictures/Background.jpg</code>即可,方法有很多种)  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> 3177970.jpg Background.jpg  </span><br></pre></td></tr></table></figure>
+
+</blockquote>
+<p><code>config</code> -&gt; <code>~/.config/i3/config</code><br><code>config.ini</code> -&gt; <code>~/.config/polybar/config.ini</code><br><code>launch.sh</code> -&gt; <code>~/.config/polybar/launch.sh</code><br>其中 <code>~/.config/polybar</code>文件夹可能不存在,创建一个即可  </p>
+</blockquote>
+<p>最后给<code>launch.sh</code>文件可执行权限:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x launch.sh</span><br></pre></td></tr></table></figure>
+
+<p>重启,使用<code>普通用户</code>登录,用startx进入i3wm即可  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startx</span><br></pre></td></tr></table></figure>
+<h3 id="如果不能克隆配置文件-那么直接写配置文件"><a href="#如果不能克隆配置文件-那么直接写配置文件" class="headerlink" title="如果不能克隆配置文件,那么直接写配置文件"></a>如果不能克隆配置文件,那么直接写配置文件</h3><p>这一步要写很多的东西,如果觉得麻烦直接用ssh登录,复制粘贴</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yay -S openssh</span><br><span class="line">sudo systemctl start sshd.service</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> sshd.service</span><br></pre></td></tr></table></figure>
+
+<p>得到ip地址</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr</span><br></pre></td></tr></table></figure>
+
+<p>然后使用一台设备连接</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh username@hostip</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>初次连接,输入一次yes  </p>
+</blockquote>
+<h4 id="背景图片"><a href="#背景图片" class="headerlink" title="背景图片"></a>背景图片</h4><p>随便去找一个图片,存放在 <code>~/Pictures/Background.jpg</code><br>比如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> ~/Pictures/</span><br><span class="line">wget https://i.328888.xyz/2023/01/17/HZUfC.jpeg</span><br><span class="line"><span class="built_in">mv</span> HZUfC.jpeg ~/Pictures/Background.jpg</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>来自<a target="_blank" rel="noopener" href="https://wallpapercave.com/">Wallpaper Cave</a>,图床的连接可能失效.  </p>
+</blockquote>
+<h4 id="编辑i3的config文件"><a href="#编辑i3的config文件" class="headerlink" title="编辑i3的config文件"></a>编辑i3的<code>config</code>文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.config/i3/config</span><br></pre></td></tr></table></figure>
+<p>在<code>set $mod Mod4</code> 这条语句下面插入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">new_window none</span><br><span class="line">new_float normal</span><br><span class="line">hide_edge_borders both</span><br><span class="line">gaps inner 8</span><br><span class="line">gaps outer 6</span><br><span class="line">bindsym <span class="variable">$mod</span>+p <span class="built_in">exec</span> mate-screenshot -i</span><br><span class="line"><span class="built_in">exec</span> --no-startup-id feh --bg-fill ~/Pictures/Background.jpg</span><br><span class="line"><span class="built_in">exec</span> --no-startup-id compton -b</span><br><span class="line"><span class="built_in">exec</span> --no-startup-id ~/.config/polybar/launch.sh</span><br></pre></td></tr></table></figure>
+
+<p>在  </p>
+<blockquote>
+<p><code># start dmenu (a program launcher)</code>  </p>
+</blockquote>
+<p>(写完上面的配置内容,那么这条语句大约在58行)<br>这条语句下面找到  </p>
+<blockquote>
+<p><code>bindsym $mod+d exec --no-startup-id dmenu_run</code>  </p>
+</blockquote>
+<p>将其注释,然后添加  </p>
+<blockquote>
+<p><code>bindsym $mod+d exec --no-startup-id rofi -show drun</code>  </p>
+</blockquote>
+<p>到这条语句下</p>
+<p>在最后一行,将</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bar &#123;</span><br><span class="line">        status_command i3status</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>全部注释 (即在开头加上#)</p>
+<h4 id="编辑-polybar-的config-ini文件"><a href="#编辑-polybar-的config-ini文件" class="headerlink" title="编辑 polybar 的config.ini文件"></a>编辑 polybar 的<code>config.ini</code>文件</h4><p>首先创建polybar的配置目录,然后把官方提供的一个样式放在里头</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> ~/.config/polybar</span><br><span class="line"><span class="built_in">cp</span> /usr/share/doc/polybar/examples/config.ini ~/.config/polybar/config.ini</span><br></pre></td></tr></table></figure>
+
+<p>修改配色样式(实际上就改了几行),这个样式就在第一位,polybar的注释符号是<code>;</code><br>观察源文件,加以修改就行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[colors]</span><br><span class="line">;background = <span class="comment">#282A2E</span></span><br><span class="line">;background-alt = <span class="comment">#373B41</span></span><br><span class="line">background = <span class="comment">#b0222222</span></span><br><span class="line">background-alt = <span class="comment">#444</span></span><br><span class="line">;foreground = <span class="comment">#C5C8C6</span></span><br><span class="line">foreground = <span class="comment">#dfdfdf</span></span><br><span class="line">foreground-alt = <span class="comment">#555</span></span><br><span class="line">primary = <span class="comment">#ffb52a</span></span><br><span class="line">secondary = <span class="comment">#e60053</span></span><br><span class="line">alert = <span class="comment">#bd2c40</span></span><br><span class="line">disabled = <span class="comment">#707880</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="写launch-sh以启动polybar"><a href="#写launch-sh以启动polybar" class="headerlink" title="写launch.sh以启动polybar"></a>写<code>launch.sh</code>以启动polybar</h4><p>创建脚本文件  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.config/polybar/launch.sh</span><br></pre></td></tr></table></figure>
+<p>插入以下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">killall -q polybar</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> pgrep -u <span class="variable">$UID</span> -x polybar &gt;/dev/null; <span class="keyword">do</span> <span class="built_in">sleep</span> 1; <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">polybar example</span><br></pre></td></tr></table></figure>
+<p>给予权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x ~/.config/polybar/launch.sh</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装一些常用工具"><a href="#安装一些常用工具" class="headerlink" title="安装一些常用工具"></a>安装一些常用工具</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S mate-extra</span><br></pre></td></tr></table></figure>
+<p><del>不多说,直接干mate-extra</del></p>
+<p>到这里,i3wm的配置基本就结束了  </p>
+<h3 id="重启-1"><a href="#重启-1" class="headerlink" title="重启"></a>重启</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<p>当需要启动i3wm的时候,只需要</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startx</span><br></pre></td></tr></table></figure>
+
+<p><del>Last Edit Time: 2023-01-17 17:46</del>  </p>
+<h1 id="ohmyzsh-美化"><a href="#ohmyzsh-美化" class="headerlink" title="ohmyzsh 美化"></a>ohmyzsh 美化</h1><h1 id="未完"><a href="#未完" class="headerlink" title="未完"></a>未完</h1><h2 id="在最后的最后，感恩。"><a href="#在最后的最后，感恩。" class="headerlink" title="在最后的最后，感恩。"></a><center>在最后的最后，感恩。</center></h2>   <p align="right">Romi Brooks♥</p> 
       <!-- reward -->
       
     </div>
