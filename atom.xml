@@ -6,7 +6,7 @@
   <link href="https://blog.romichan.me/atom.xml" rel="self"/>
   
   <link href="https://blog.romichan.me/"/>
-  <updated>2023-01-17T17:48:38.886Z</updated>
+  <updated>2023-02-24T18:19:45.893Z</updated>
   <id>https://blog.romichan.me/</id>
   
   <author>
@@ -17,11 +17,44 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Nginx二级域名配置</title>
+    <link href="https://blog.romichan.me/2023/02/25/Nginx%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE/"/>
+    <id>https://blog.romichan.me/2023/02/25/Nginx%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE/</id>
+    <published>2023-02-24T16:00:00.000Z</published>
+    <updated>2023-02-24T18:19:45.893Z</updated>
+    
+    
+    <summary type="html">&lt;center&gt;  
+
+&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=2020918656&amp;auto=0&amp;height=66&quot;&gt;&lt;/iframe&gt;  
+
+&lt;p&gt;&lt;del&gt;YOASOBI 在 2月15号出新专辑了捏&lt;/del&gt;  &lt;/p&gt;
+&lt;/center&gt;  
+
+&lt;blockquote&gt;
+&lt;p&gt;在去年Digital Ocean把我的账号突然封禁之后,我甚至没有办法迁移我的数据,所有配置文件只能重写&lt;br&gt;这里是为了留一份Nginx中二级域名.conf配置文件的写法,依据我的习惯,仅供参考 &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Nginx现在的版本应该会在&lt;code&gt;/etc/nginx/&lt;/code&gt;目录存在&lt;code&gt;nginx.conf&lt;/code&gt;&lt;br&gt;这里大概是这样  &lt;/p&gt;</summary>
+    
+    
+    
+    <category term="WebDev" scheme="https://blog.romichan.me/categories/WebDev/"/>
+    
+    
+    <category term="Nginx" scheme="https://blog.romichan.me/tags/Nginx/"/>
+    
+    <category term="WebDev" scheme="https://blog.romichan.me/tags/WebDev/"/>
+    
+    <category term="Website" scheme="https://blog.romichan.me/tags/Website/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Archlinux + U盘 打造随身系统盘</title>
     <link href="https://blog.romichan.me/2023/01/09/Archlinux%20+%20U%E7%9B%98%20%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/"/>
     <id>https://blog.romichan.me/2023/01/09/Archlinux%20+%20U%E7%9B%98%20%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/</id>
     <published>2023-01-08T16:00:00.000Z</published>
-    <updated>2023-01-17T17:48:38.886Z</updated>
+    <updated>2023-02-24T18:13:21.199Z</updated>
     
     
     <summary type="html">&lt;p&gt;&lt;img src=&quot;/../../../img/Archlinux-U%E7%9B%98-%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/Cover.jpg&quot; alt=&quot;封面&quot; title=&quot;Cover&quot;&gt;&lt;/p&gt;

@@ -1,3 +1,4 @@
+https://blog.romichan.me/2023/02/25/Nginx%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE/
 https://blog.romichan.me/2023/01/09/Archlinux%20+%20U%E7%9B%98%20%E6%89%93%E9%80%A0%E9%9A%8F%E8%BA%AB%E7%B3%BB%E7%BB%9F%E7%9B%98/
 https://blog.romichan.me/tags/index.html
 https://blog.romichan.me/categories/index.html
@@ -10,8 +11,12 @@ https://blog.romichan.me/tags/Archlinux/
 https://blog.romichan.me/tags/Installation/
 https://blog.romichan.me/tags/i3wm/
 https://blog.romichan.me/tags/FL-Tips/
+https://blog.romichan.me/tags/Nginx/
+https://blog.romichan.me/tags/WebDev/
+https://blog.romichan.me/tags/Website/
 https://blog.romichan.me/tags/Reaper/
 https://blog.romichan.me/tags/SysRecord/
 https://blog.romichan.me/categories/Linux/
 https://blog.romichan.me/categories/Music/
+https://blog.romichan.me/categories/WebDev/
 https://blog.romichan.me/categories/Music/Linux/
