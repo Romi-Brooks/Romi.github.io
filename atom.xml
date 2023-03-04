@@ -6,7 +6,7 @@
   <link href="https://blog.romichan.me/atom.xml" rel="self"/>
   
   <link href="https://blog.romichan.me/"/>
-  <updated>2023-02-24T18:19:45.893Z</updated>
+  <updated>2023-03-04T16:01:58.469Z</updated>
   <id>https://blog.romichan.me/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Navidrome，定义你自己离线的播放器</title>
+    <link href="https://blog.romichan.me/2023/03/04/Navidrome%EF%BC%8C%E5%AE%9A%E4%B9%89%E4%BD%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E7%A6%BB%E7%BA%BF%E6%92%AD%E6%94%BE%E5%99%A8/"/>
+    <id>https://blog.romichan.me/2023/03/04/Navidrome%EF%BC%8C%E5%AE%9A%E4%B9%89%E4%BD%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E7%A6%BB%E7%BA%BF%E6%92%AD%E6%94%BE%E5%99%A8/</id>
+    <published>2023-03-03T16:00:00.000Z</published>
+    <updated>2023-03-04T16:01:58.469Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;/../../../img/Navidrome-U-Own-Music-Player/cover.png&quot; alt=&quot;封面&quot; title=&quot;Cover&quot;&gt;&lt;/p&gt;
+&lt;p&gt;最近在上传我的本地歌曲库的时候,发现过于麻烦,(筛选,打包,上传.如果我需要修改某个文件的时候还需要再下载回来,然后解压,再修改.重复这个步骤)于是想到了托管到VPS,并且实现流媒体播放.那么这还是蛮不错的!  &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;PS:这个很早就打算做了,只不过懒,就一直拖下去了(因为早期下载歌曲的时候过于偷懒导致过50%的歌曲的metadata都出现了不匹配的问题…..)  &lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="Music" scheme="https://blog.romichan.me/categories/Music/"/>
+    
+    
+    <category term="Nginx" scheme="https://blog.romichan.me/tags/Nginx/"/>
+    
+    <category term="Music" scheme="https://blog.romichan.me/tags/Music/"/>
+    
+    <category term="Website" scheme="https://blog.romichan.me/tags/Website/"/>
+    
+  </entry>
   
   <entry>
     <title>Nginx二级域名配置</title>
@@ -43,9 +70,9 @@
     
     <category term="Nginx" scheme="https://blog.romichan.me/tags/Nginx/"/>
     
-    <category term="WebDev" scheme="https://blog.romichan.me/tags/WebDev/"/>
-    
     <category term="Website" scheme="https://blog.romichan.me/tags/Website/"/>
+    
+    <category term="WebDev" scheme="https://blog.romichan.me/tags/WebDev/"/>
     
   </entry>
   

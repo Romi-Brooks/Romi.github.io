@@ -313,6 +313,87 @@
       </tags>
   </entry>
   <entry>
+    <title>Navidrome，定义你自己离线的播放器</title>
+    <url>/2023/03/04/Navidrome%EF%BC%8C%E5%AE%9A%E4%B9%89%E4%BD%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E7%A6%BB%E7%BA%BF%E6%92%AD%E6%94%BE%E5%99%A8/</url>
+    <content><![CDATA[<p><img src="/../../../img/Navidrome-U-Own-Music-Player/cover.png" alt="封面" title="Cover"></p>
+<p>最近在上传我的本地歌曲库的时候,发现过于麻烦,(筛选,打包,上传.如果我需要修改某个文件的时候还需要再下载回来,然后解压,再修改.重复这个步骤)于是想到了托管到VPS,并且实现流媒体播放.那么这还是蛮不错的!  </p>
+<blockquote>
+<p>PS:这个很早就打算做了,只不过懒,就一直拖下去了(因为早期下载歌曲的时候过于偷懒导致过50%的歌曲的metadata都出现了不匹配的问题…..)  </p>
+</blockquote>
+<span id="more"></span>  
+<p><strong>同样,这个东西也适用于内网用户(如NAS用户)访问自己的媒体文件,其实这类软件目标人群应该就是这个.</strong>  </p>
+<h1 id="寻找一个适合的软件"><a href="#寻找一个适合的软件" class="headerlink" title="寻找一个适合的软件"></a>寻找一个适合的软件</h1><p>我的基本要求是,颜值首先!如果不好看,我估计我会第一个舍弃…..<br>其次必须支持<code>流式媒体播放</code>,这一次托管的目的就在这里!<br>然后是功能必须齐全:比如<code>歌手排序``歌单排序``用户喜爱``封面展示</code>…..<br>最后是方便部署,如果部署起来特别麻烦,那是真的得不偿失…..<br>我大概花费了几个小时尝试,而后偶然发现了<code>Navidrome</code>,也就是这篇文章的主角.  </p>
+<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p><code>Navidrome</code> 的部署分为三步,我觉得简单到天际…..  </p>
+<ul>
+<li>下载,解压</li>
+<li>配置歌曲文件夹</li>
+<li>运行</li>
+</ul>
+<p>Step 1. 下载只需要到<a href="https://github.com/navidrome/navidrome">Navidrome</a>的<a href="https://github.com/navidrome/navidrome/releases">releases</a>里下符合你系统架构的二进制文件. ez to do it.<br>然后解压,一般直接</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xvf filename.tar.gz</span><br></pre></td></tr></table></figure>
+<p>Step 2. 在你程序目录新建一个<code>music</code>文件夹,可以直接放音乐,也可以软连接到你自己的音乐文件夹.只要有音乐就行!<br>Step 3. 启动,这里推荐用<code>screen</code>或者是你喜欢的什么软件来防止被ban.到这里<code>Navidrome</code>就部署完成了.简单的一b</p>
+<p>后续的设置基本就是<code>Nginx 反向代理</code>,让他更加简洁美观 (同时加锁,即取得https)</p>
+<p>参考上一篇博客,在<code>player.ssl.conf</code>里写入以下内容(根据自己的改):</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    <span class="attribute">listen</span>  <span class="number">443</span> ssl;</span><br><span class="line">    <span class="attribute">ssl_certificate</span> /etc/letsencrypt/live/player.romichan.me/fullchain.pem;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> /etc/letsencrypt/live/player.romichan.me/privkey.pem;</span><br><span class="line">    <span class="attribute">server_name</span>  player.romichan.me;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span>  http://127.0.0.1:4533; <span class="comment"># 这里就是转发的地址了</span></span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$proxy_host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>player.conf</code>里写入:</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>  <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span>  player.romichan.me;</span><br><span class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^(.*)$</span>  https://<span class="variable">$host</span><span class="variable">$1</span> <span class="literal">permanent</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>到这里,我认为全部就部署好了<br>这时候使用<code>player.romichan.me</code>进入你的<code>Navidrome</code>,初次使用会让你设置管理员用户和密码,记好就行了.  </p>
+<p>还有什么要说的呢?<br>哦,对….<br>你在使用这些离线音乐库的时候就要注意,你本地音乐的metadata一定不要有太多的问题,不然整个页面看起来都会很乱<br>我为什么会在文章开头我懒得去弄呢?就是因为我后续整理metadata用了将近三个小时….这真的很折磨…<br><img src="/../../../img/Navidrome-U-Own-Music-Player/1.0.1.jpg" alt="折磨" title="折磨">  </p>
+<p><del>当然如果你的习惯很好,那么这个当然对你来说没有任何问题,加油!</del></p>
+<hr>
+<h2 id="在最后的最后，感恩。"><a href="#在最后的最后，感恩。" class="headerlink" title="在最后的最后，感恩。"></a><center>在最后的最后，感恩。</center></h2>   <p align="right">Romi Brooks♥</p>]]></content>
+      <categories>
+        <category>Music</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+        <tag>Music</tag>
+        <tag>Website</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Nginx二级域名配置</title>
+    <url>/2023/02/25/Nginx%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<center>  
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2020918656&auto=0&height=66"></iframe>  
+
+<p><del>YOASOBI 在 2月15号出新专辑了捏</del>  </p>
+</center>  
+
+<blockquote>
+<p>在去年Digital Ocean把我的账号突然封禁之后,我甚至没有办法迁移我的数据,所有配置文件只能重写<br>这里是为了留一份Nginx中二级域名.conf配置文件的写法,依据我的习惯,仅供参考 </p>
+</blockquote>
+<p>Nginx现在的版本应该会在<code>/etc/nginx/</code>目录存在<code>nginx.conf</code><br>这里大概是这样  </p>
+<span id="more"></span>  
+
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attribute">user</span>  nginx;</span><br><span class="line"><span class="attribute">worker_processes</span>  auto;</span><br><span class="line"></span><br><span class="line"><span class="attribute">error_log</span>  /var/log/nginx/<span class="literal">error</span>.log <span class="literal">notice</span>;</span><br><span class="line"><span class="attribute">pid</span>        /var/run/nginx.pid;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">    <span class="attribute">worker_connections</span>  <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="attribute">include</span>       /etc/nginx/mime.types;</span><br><span class="line">    <span class="attribute">default_type</span>  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">log_format</span>  main  <span class="string">&#x27;<span class="variable">$remote_addr</span> - <span class="variable">$remote_user</span> [<span class="variable">$time_local</span>] &quot;<span class="variable">$request</span>&quot; &#x27;</span></span><br><span class="line">                      <span class="string">&#x27;<span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> &quot;<span class="variable">$http_referer</span>&quot; &#x27;</span></span><br><span class="line">                      <span class="string">&#x27;&quot;<span class="variable">$http_user_agent</span>&quot; &quot;<span class="variable">$http_x_forwarded_for</span>&quot;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">access_log</span>  /var/log/nginx/access.log  main;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">sendfile</span>        <span class="literal">on</span>;</span><br><span class="line">    <span class="comment">#tcp_nopush     on;</span></span><br><span class="line"></span><br><span class="line">    <span class="attribute">keepalive_timeout</span>  <span class="number">65</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#gzip  on;</span></span><br><span class="line"></span><br><span class="line">    <span class="attribute">include</span> /etc/nginx/conf.d/<span class="regexp">*.conf</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可见,<code>nginx.conf</code>引用了<code>/etc/nginx/conf.d/</code>下的所有.conf文件<br>这里我习惯把我的个人网站配置文件放在这  </p>
+<h1 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h1><p>现在假设我想要创建一个名为<code>blog.romichan.me</code>的网站,用来存放我的博客<br>首先在你域名的托管商配置<code>DNS解析</code>,可以是A解析,也可以是AAAA解析,需要绑定到服务器上<br>接着在<code>/etc/nginx/conf.d/</code>下新建一个名为<code>blog.ssl.conf</code>的文件,他一般是这样的:  </p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>  <span class="number">443</span> ssl;    <span class="comment"># 自从新版本nginx开始,启用ssl隧道得这么写</span></span><br><span class="line">    <span class="attribute">ssl_certificate</span> /etc/letsencrypt/live/blog.romichan.me/fullchain.pem;   <span class="comment"># 证书文件</span></span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> /etc/letsencrypt/live/blog.romichan.me/privkey.pem; <span class="comment"># 证书密钥文件</span></span><br><span class="line">    <span class="attribute">server_name</span>  blog.romichan.me;  <span class="comment">#这里就是要解析到的域名,也就是你在域名托管商的DNS解析里所设置的</span></span><br><span class="line">        <span class="section">location</span> / &#123;</span><br><span class="line">            <span class="attribute">root</span>         /usr/share/webpage/blog; <span class="comment">#这里是博客的根目录.据你的需求,我只需要index.html所以下面的index只写了这些</span></span><br><span class="line">            <span class="attribute">index</span>        index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而后我们在新建一个文件,它的名字是<code>blog.conf</code>,写入这些:  </p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>  <span class="number">80</span>; <span class="comment"># 不作解释,8080也行</span></span><br><span class="line">    <span class="attribute">server_name</span>  blog.romichan.me; <span class="comment"># 解析到的网站</span></span><br><span class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^(.*)$</span>  https://<span class="variable">$host</span><span class="variable">$1</span> <span class="literal">permanent</span>; <span class="comment"># 重点,这里是把网页强行重定向到https,这样我们上面的证书才可以起到效果!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总体就这么多,如果你需要通过二级域名来转发你服务器某个端口的数据 (应该是叫<code>反向代理</code>) ,也是这么写,不过需要修改<code>blog.ssl.conf</code>的一些地方:  </p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    <span class="attribute">listen</span>  <span class="number">443</span> ssl;</span><br><span class="line">    <span class="attribute">ssl_certificate</span> /etc/letsencrypt/live/blog.romichan.me/fullchain.pem;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> /etc/letsencrypt/live/blog.romichan.me/privkey.pem;</span><br><span class="line">    <span class="attribute">server_name</span>  blog.romichan.me;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span>  http://127.0.0.1:8080; <span class="comment"># 这里就是转发的地址了</span></span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$proxy_host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="That’s-all"><a href="#That’s-all" class="headerlink" title="That’s all"></a>That’s all</h1><p>这就是一个随笔  </p>
+<p>我当时在搜集这些资料的时候被很多的名字都吓到了,但其实这是一个很简单的东西,完全是一个模板化的东西,只需要记下来,以后应该都是适用的  </p>
+<p>大概就这么多,如果你看到了,希望对你有帮助.  </p>
+<hr>
+<h2 id="在最后的最后，感恩。"><a href="#在最后的最后，感恩。" class="headerlink" title="在最后的最后，感恩。"></a><center>在最后的最后，感恩。</center></h2>   <p align="right">Romi Brooks♥</p>]]></content>
+      <categories>
+        <category>WebDev</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+        <tag>Website</tag>
+        <tag>WebDev</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>FL Studio Tips: 通过控制LFO Speed，使你的音乐更有律动</title>
     <url>/2022/04/27/FL-Studio-Tips-%E5%88%A9%E7%94%A8LFO-LFO-Speed%E5%81%9A%E5%87%BA%E5%8A%A0%E8%8A%B1%E6%95%88%E6%9E%9C/</url>
     <content><![CDATA[<p><img src="/../../../img/FL-Studio-Tips-LFO-Speed/cover.png" alt="封面" title="Cover"></p>
@@ -386,46 +467,6 @@
       </categories>
       <tags>
         <tag>FL-Tips</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Nginx二级域名配置</title>
-    <url>/2023/02/25/Nginx%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<center>  
-
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2020918656&auto=0&height=66"></iframe>  
-
-<p><del>YOASOBI 在 2月15号出新专辑了捏</del>  </p>
-</center>  
-
-<blockquote>
-<p>在去年Digital Ocean把我的账号突然封禁之后,我甚至没有办法迁移我的数据,所有配置文件只能重写<br>这里是为了留一份Nginx中二级域名.conf配置文件的写法,依据我的习惯,仅供参考 </p>
-</blockquote>
-<p>Nginx现在的版本应该会在<code>/etc/nginx/</code>目录存在<code>nginx.conf</code><br>这里大概是这样  </p>
-<span id="more"></span>  
-
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attribute">user</span>  nginx;</span><br><span class="line"><span class="attribute">worker_processes</span>  auto;</span><br><span class="line"></span><br><span class="line"><span class="attribute">error_log</span>  /var/log/nginx/<span class="literal">error</span>.log <span class="literal">notice</span>;</span><br><span class="line"><span class="attribute">pid</span>        /var/run/nginx.pid;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">    <span class="attribute">worker_connections</span>  <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="attribute">include</span>       /etc/nginx/mime.types;</span><br><span class="line">    <span class="attribute">default_type</span>  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">log_format</span>  main  <span class="string">&#x27;<span class="variable">$remote_addr</span> - <span class="variable">$remote_user</span> [<span class="variable">$time_local</span>] &quot;<span class="variable">$request</span>&quot; &#x27;</span></span><br><span class="line">                      <span class="string">&#x27;<span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> &quot;<span class="variable">$http_referer</span>&quot; &#x27;</span></span><br><span class="line">                      <span class="string">&#x27;&quot;<span class="variable">$http_user_agent</span>&quot; &quot;<span class="variable">$http_x_forwarded_for</span>&quot;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">access_log</span>  /var/log/nginx/access.log  main;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">sendfile</span>        <span class="literal">on</span>;</span><br><span class="line">    <span class="comment">#tcp_nopush     on;</span></span><br><span class="line"></span><br><span class="line">    <span class="attribute">keepalive_timeout</span>  <span class="number">65</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#gzip  on;</span></span><br><span class="line"></span><br><span class="line">    <span class="attribute">include</span> /etc/nginx/conf.d/<span class="regexp">*.conf</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可见,<code>nginx.conf</code>引用了<code>/etc/nginx/conf.d/</code>下的所有.conf文件<br>这里我习惯把我的个人网站配置文件放在这  </p>
-<h1 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h1><p>现在假设我想要创建一个名为<code>blog.romichan.me</code>的网站,用来存放我的博客<br>首先在你域名的托管商配置<code>DNS解析</code>,可以是A解析,也可以是AAAA解析,需要绑定到服务器上<br>接着在<code>/etc/nginx/conf.d/</code>下新建一个名为<code>blog.ssl.conf</code>的文件,他一般是这样的:  </p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>  <span class="number">443</span> ssl;    <span class="comment"># 自从新版本nginx开始,启用ssl隧道得这么写</span></span><br><span class="line">    <span class="attribute">ssl_certificate</span> /etc/letsencrypt/live/blog.romichan.me/fullchain.pem;   <span class="comment"># 证书文件</span></span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> /etc/letsencrypt/live/blog.romichan.me/privkey.pem; <span class="comment"># 证书密钥文件</span></span><br><span class="line">    <span class="attribute">server_name</span>  blog.romichan.me;  <span class="comment">#这里就是要解析到的域名,也就是你在域名托管商的DNS解析里所设置的</span></span><br><span class="line">        <span class="section">location</span> / &#123;</span><br><span class="line">            <span class="attribute">root</span>         /usr/share/webpage/blog; <span class="comment">#这里是博客的根目录.据你的需求,我只需要index.html所以下面的index只写了这些</span></span><br><span class="line">            <span class="attribute">index</span>        index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>而后我们在新建一个文件,它的名字是<code>blog.conf</code>,写入这些:  </p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>  <span class="number">80</span>; <span class="comment"># 不作解释,8080也行</span></span><br><span class="line">    <span class="attribute">server_name</span>  blog.romichan.me; <span class="comment"># 解析到的网站</span></span><br><span class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^(.*)$</span>  https://<span class="variable">$host</span><span class="variable">$1</span> <span class="literal">permanent</span>; <span class="comment"># 重点,这里是把网页强行重定向到https,这样我们上面的证书才可以起到效果!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>总体就这么多,如果你需要通过二级域名来转发你服务器某个端口的数据 (应该是叫<code>反向代理</code>) ,也是这么写,不过需要修改<code>blog.ssl.conf</code>的一些地方:  </p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    <span class="attribute">listen</span>  <span class="number">443</span> ssl;</span><br><span class="line">    <span class="attribute">ssl_certificate</span> /etc/letsencrypt/live/blog.romichan.me/fullchain.pem;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> /etc/letsencrypt/live/blog.romichan.me/privkey.pem;</span><br><span class="line">    <span class="attribute">server_name</span>  blog.romichan.me;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span>  http://127.0.0.1:8080; <span class="comment"># 这里就是转发的地址了</span></span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$proxy_host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="That’s-all"><a href="#That’s-all" class="headerlink" title="That’s all"></a>That’s all</h1><p>这就是一个随笔  </p>
-<p>我当时在搜集这些资料的时候被很多的名字都吓到了,但其实这是一个很简单的东西,完全是一个模板化的东西,只需要记下来,以后应该都是适用的  </p>
-<p>大概就这么多,如果你看到了,希望对你有帮助.  </p>
-<hr>
-<h2 id="在最后的最后，感恩。"><a href="#在最后的最后，感恩。" class="headerlink" title="在最后的最后，感恩。"></a><center>在最后的最后，感恩。</center></h2>   <p align="right">Romi Brooks♥</p>]]></content>
-      <categories>
-        <category>WebDev</category>
-      </categories>
-      <tags>
-        <tag>Nginx</tag>
-        <tag>WebDev</tag>
-        <tag>Website</tag>
       </tags>
   </entry>
   <entry>
