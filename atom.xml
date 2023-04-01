@@ -6,7 +6,7 @@
   <link href="https://blog.romichan.me/atom.xml" rel="self"/>
   
   <link href="https://blog.romichan.me/"/>
-  <updated>2023-03-04T16:01:58.469Z</updated>
+  <updated>2023-04-01T04:28:18.190Z</updated>
   <id>https://blog.romichan.me/</id>
   
   <author>
@@ -17,11 +17,41 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Nginx中code-server的ws配置</title>
+    <link href="https://blog.romichan.me/2023/04/01/Nginx%E4%B8%ADcode-server%E7%9A%84ws%E9%85%8D%E7%BD%AE/"/>
+    <id>https://blog.romichan.me/2023/04/01/Nginx%E4%B8%ADcode-server%E7%9A%84ws%E9%85%8D%E7%BD%AE/</id>
+    <published>2023-03-31T16:00:00.000Z</published>
+    <updated>2023-04-01T04:28:18.190Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;/../../../img/Nginx%E4%B8%ADcode-server%E7%9A%84ws%E9%85%8D%E7%BD%AE/Cover.png&quot; alt=&quot;封面&quot; title=&quot;Cover&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这个问题已经有很多人出现了,github也有人提出了issues&lt;br&gt;&lt;a href=&quot;https://github.com/coder/code-server/issues/4443&quot;&gt;https://github.com/coder/code-server/issues/4443&lt;/a&gt;  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="WebDev" scheme="https://blog.romichan.me/categories/WebDev/"/>
+    
+    
+    <category term="Nginx" scheme="https://blog.romichan.me/tags/Nginx/"/>
+    
+    <category term="Website" scheme="https://blog.romichan.me/tags/Website/"/>
+    
+    <category term="WebDev" scheme="https://blog.romichan.me/tags/WebDev/"/>
+    
+    <category term="code-server" scheme="https://blog.romichan.me/tags/code-server/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Navidrome，定义你自己离线的播放器</title>
     <link href="https://blog.romichan.me/2023/03/04/Navidrome%EF%BC%8C%E5%AE%9A%E4%B9%89%E4%BD%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E7%A6%BB%E7%BA%BF%E6%92%AD%E6%94%BE%E5%99%A8/"/>
     <id>https://blog.romichan.me/2023/03/04/Navidrome%EF%BC%8C%E5%AE%9A%E4%B9%89%E4%BD%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E7%A6%BB%E7%BA%BF%E6%92%AD%E6%94%BE%E5%99%A8/</id>
     <published>2023-03-03T16:00:00.000Z</published>
-    <updated>2023-03-04T16:01:58.469Z</updated>
+    <updated>2023-04-01T04:13:41.974Z</updated>
     
     
     <summary type="html">&lt;p&gt;&lt;img src=&quot;/../../../img/Navidrome-U-Own-Music-Player/cover.png&quot; alt=&quot;封面&quot; title=&quot;Cover&quot;&gt;&lt;/p&gt;
@@ -120,7 +150,7 @@
     <link href="https://blog.romichan.me/2022/10/28/%E5%88%A9%E7%94%A8JACK%20,%20%E7%8E%A9%E8%BD%AC%20Reaper%20For%20Linux/"/>
     <id>https://blog.romichan.me/2022/10/28/%E5%88%A9%E7%94%A8JACK%20,%20%E7%8E%A9%E8%BD%AC%20Reaper%20For%20Linux/</id>
     <published>2022-10-27T16:00:00.000Z</published>
-    <updated>2023-01-09T14:56:03.636Z</updated>
+    <updated>2023-04-01T04:16:05.906Z</updated>
     
     
     <summary type="html">&lt;p&gt;&lt;img src=&quot;/../../../img/JACK-Reaper-For-Linux/Cover.png&quot; alt=&quot;封面&quot; title=&quot;Cover&quot;&gt;&lt;/p&gt;
@@ -134,9 +164,7 @@
     
     
     
-    <category term="Music" scheme="https://blog.romichan.me/categories/Music/"/>
-    
-    <category term="Linux" scheme="https://blog.romichan.me/categories/Music/Linux/"/>
+    <category term="Linux" scheme="https://blog.romichan.me/categories/Linux/"/>
     
     
     <category term="Reaper" scheme="https://blog.romichan.me/tags/Reaper/"/>
