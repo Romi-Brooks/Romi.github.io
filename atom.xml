@@ -6,7 +6,7 @@
   <link href="https://blog.romichan.me/atom.xml" rel="self"/>
   
   <link href="https://blog.romichan.me/"/>
-  <updated>2023-04-01T04:28:18.190Z</updated>
+  <updated>2023-07-28T04:14:17.960Z</updated>
   <id>https://blog.romichan.me/</id>
   
   <author>
@@ -21,14 +21,12 @@
     <link href="https://blog.romichan.me/2023/04/01/Nginx%E4%B8%ADcode-server%E7%9A%84ws%E9%85%8D%E7%BD%AE/"/>
     <id>https://blog.romichan.me/2023/04/01/Nginx%E4%B8%ADcode-server%E7%9A%84ws%E9%85%8D%E7%BD%AE/</id>
     <published>2023-03-31T16:00:00.000Z</published>
-    <updated>2023-04-01T04:28:18.190Z</updated>
+    <updated>2023-07-28T04:14:17.960Z</updated>
     
     
     <summary type="html">&lt;p&gt;&lt;img src=&quot;/../../../img/Nginx%E4%B8%ADcode-server%E7%9A%84ws%E9%85%8D%E7%BD%AE/Cover.png&quot; alt=&quot;封面&quot; title=&quot;Cover&quot;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;blockquote&gt;
 &lt;p&gt;这个问题已经有很多人出现了,github也有人提出了issues&lt;br&gt;&lt;a href=&quot;https://github.com/coder/code-server/issues/4443&quot;&gt;https://github.com/coder/code-server/issues/4443&lt;/a&gt;  &lt;/p&gt;
-&lt;/blockquote&gt;
 &lt;/blockquote&gt;</summary>
     
     
