@@ -499,13 +499,13 @@
   <entry>
     <title>Hello Hexo</title>
     <url>/2022/04/17/hello-world/</url>
-    <content><![CDATA[<h2 id="Welcome-to-My-Bolg-I’m-Romi-Brooks"><a href="#Welcome-to-My-Bolg-I’m-Romi-Brooks" class="headerlink" title="Welcome to My Bolg! I’m Romi Brooks."></a>Welcome to <a href="https://blog.romichan.me/">My Bolg</a>! I’m <a href="https://home.romichan.me/">Romi Brooks</a>.</h2><audio id="audio" controls="" preload="none">
+    <content><![CDATA[<h2 id="Welcome-to-My-Bolg-I’m-Romi-Brooks"><a href="#Welcome-to-My-Bolg-I’m-Romi-Brooks" class="headerlink" title="Welcome to My Bolg! I’m Romi Brooks."></a>Welcome to <a href="https://blog.heyromi.icu/">My Bolg</a>! I’m <a href="https://home.heyromi.icu/">Romi Brooks</a>.</h2><audio id="audio" controls="" preload="none">
     <source id="mp3" src="../../../../music/CE.mp3">
 </audio>
 
 <p><em>What do you want to be, It’s what do you do, Not what you think.</em> </p>
 <blockquote>
-<p>Blog owner: <a href="home.romichan.me">Romi Brooks</a><br>Ellis (Music Producer): <a href="http://music.163.com/artist?id=32932&userid=13691861">Ellis</a><br>Music: <a href="https://y.music.163.com/m/song?id=1383943958">Colours (Extended Mix)</a></p>
+<p>Blog owner: <a href="https://blog.heyromi.icu/">Romi Brooks</a><br>Ellis (Music Producer): <a href="http://music.163.com/artist?id=32932&userid=13691861">Ellis</a><br>Music: <a href="https://y.music.163.com/m/song?id=1383943958">Colours (Extended Mix)</a></p>
 </blockquote>
 ]]></content>
   </entry>
@@ -593,9 +593,11 @@ Categories=Music;
   <entry>
     <title>变更记录</title>
     <url>/2000/01/01/%E5%8F%98%E6%9B%B4%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="2022-10-6："><a href="#2022-10-6：" class="headerlink" title="2022-10-6："></a>2022-10-6：</h2><ul>
-<li>将Github Page上托管的Blog仓库迁移至主服务器<h2 id="2022-6-23："><a href="#2022-6-23：" class="headerlink" title="2022-6-23："></a>2022-6-23：</h2></li>
-<li>将Blog从旧域名迁移至新域名<h2 id="2022-6-17："><a href="#2022-6-17：" class="headerlink" title="2022-6-17："></a>2022-6-17：</h2></li>
+    <content><![CDATA[<h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><h2 id="2023-9-3"><a href="#2023-9-3" class="headerlink" title="2023-9-3 :"></a>2023-9-3 :</h2><ul>
+<li>迁移主站到新域名,由Github Page托管  <span id="more"></span>
+<h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><h2 id="2022-10-6："><a href="#2022-10-6：" class="headerlink" title="2022-10-6："></a>2022-10-6：</h2></li>
+<li>将Github Page上托管的Blog仓库迁移至主服务器  <h2 id="2022-6-23："><a href="#2022-6-23：" class="headerlink" title="2022-6-23："></a>2022-6-23：</h2></li>
+<li>迁移主站至新域名  <h2 id="2022-6-17："><a href="#2022-6-17：" class="headerlink" title="2022-6-17："></a>2022-6-17：</h2></li>
 <li>上传Blog仓库到Github，并且托管至Github Page</li>
 </ul>
 ]]></content>
